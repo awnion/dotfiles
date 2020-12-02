@@ -5,6 +5,9 @@ env:
 
 window:
   dynamic_title: true
+  padding:
+    x: 10
+    y: 10
   decorations: full
   startup_mode: Maximized
 
@@ -14,14 +17,17 @@ scrolling:
 
 font:
   normal:
-    family: "Iosevka Nerd Font"
+    family: "Iosevka Nerd Font Mono"
     style: Regular
   bold:
     style: Bold  
-  size: 18.0
+  size: 18
+  offset:
+    x: 0
+    y: 0
+
   use_thin_strokes: true
 
-# background_opacity: 0.99
 colors:
   primary:
     # background: '#3f0e2f'
@@ -68,11 +74,7 @@ cursor:
   style: Block 
 
 key_bindings:
-  # - { key: N, mods: Command, action: SpawnNewInstance }
-  # - { key: Comma, mods: Command, command: { program: "code", args: ["~/.config/alacritty/alacritty.yml"] } }
-  
-  - { key: R, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["source-file", "~/.tmux.conf"] } }
-
+  - { key: Q, mods: Command, action: None }
   - { key: W, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["kill-pane"] } }
   - { key: W, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["kill-window"] } }
   - { key: T, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["new-window", "-c #{pane_current_path}"] } }
