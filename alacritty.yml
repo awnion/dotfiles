@@ -1,7 +1,7 @@
 # based on default config: https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 env:
-  TERM: xterm-256color
+  TERM: alacritty
 
 window:
   dynamic_title: true
@@ -28,44 +28,74 @@ font:
 
   use_thin_strokes: true
 
+# colors:
+#   primary:
+#     # background: '#3f0e2f'
+#     # background: '#c5c8c6'
+#     background: '#3a132f'
+#     foreground: '#999998'
+#   cursor:
+#     text: '#000000'
+#     cursor: '#ffffff'
+#   selection:
+#     text: '#eaeaea'
+#     background: '#404040'
+#   normal:
+#     black:   '#1d1f21'
+#     red:     '#cc6666'
+#     green:   '#b5bd68'
+#     yellow:  '#f0c674'
+#     blue:    '#81a2be'
+#     magenta: '#b294bb'
+#     cyan:    '#8abeb7'
+#     white:   '#c5c8c6'
+#   bright:
+#     black:   '#666666'
+#     red:     '#d54e53'
+#     green:   '#b9ca4a'
+#     yellow:  '#e7c547'
+#     blue:    '#7aa6da'
+#     magenta: '#c397d8'
+#     cyan:    '#70c0b1'
+#     white:   '#eaeaea'
+#   dim:
+#     black:   '#131415'
+#     red:     '#864343'
+#     green:   '#777c44'
+#     yellow:  '#9e824c'
+#     blue:    '#556a7d'
+#     magenta: '#75617b'
+#     cyan:    '#5b7d78'
+#     white:   '#828482'
+
+# Solarized light
 colors:
+  # Default colors
   primary:
-    # background: '#3f0e2f'
-    background: '#3a132f'
-    foreground: '#999998'
-  cursor:
-    text: '#000000'
-    cursor: '#ffffff'
-  selection:
-    text: '#eaeaea'
-    background: '#404040'
+    background: '0xfdf6e3'
+    foreground: '0x586e75'
+
+  # Normal colors
   normal:
-    black:   '#1d1f21'
-    red:     '#cc6666'
-    green:   '#b5bd68'
-    yellow:  '#f0c674'
-    blue:    '#81a2be'
-    magenta: '#b294bb'
-    cyan:    '#8abeb7'
-    white:   '#c5c8c6'
+    black:   '0x073642'
+    red:     '0xdc322f'
+    green:   '0x859900'
+    yellow:  '0xb58900'
+    blue:    '0x268bd2'
+    magenta: '0xd33682'
+    cyan:    '0x2aa198'
+    white:   '0xeee8d5'
+
+  # Bright colors
   bright:
-    black:   '#666666'
-    red:     '#d54e53'
-    green:   '#b9ca4a'
-    yellow:  '#e7c547'
-    blue:    '#7aa6da'
-    magenta: '#c397d8'
-    cyan:    '#70c0b1'
-    white:   '#eaeaea'
-  dim:
-    black:   '#131415'
-    red:     '#864343'
-    green:   '#777c44'
-    yellow:  '#9e824c'
-    blue:    '#556a7d'
-    magenta: '#75617b'
-    cyan:    '#5b7d78'
-    white:   '#828482'
+    black:   '0x002b36'
+    red:     '0xcb4b16'
+    green:   '0x586e75'
+    yellow:  '0x657b83'
+    blue:    '0x839496'
+    magenta: '0x6c71c4'
+    cyan:    '0x93a1a1'
+    white:   '0xfdf6e3'
 
 selection:
   save_to_clipboard: false
@@ -74,32 +104,37 @@ cursor:
   style: Block 
 
 key_bindings:
-  - { key: Q, mods: Command, action: None }
+  # use "xxd" outside of tmux to find out codes for chars
+  # - { key: Q, mods: Command, action: None }
+  - { key: A, mods: Command, chars: "\x02\x77" }  # ^Bw
+  - { key: Y, mods: Command, command: { program: "/bin/zsh", args: ["-l", "-c", "env | tee /tmp/alacritty_env"] } }
+  - { key: R, mods: Command, command: { program: "/bin/zsh", args: ["-l", "-c", "tmux display-message 'Reload config'; tmux source-file ~/.tmux.conf"] } }
+
   - { key: W, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["kill-pane"] } }
   - { key: W, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["kill-window"] } }
-  - { key: T, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["new-window", "-c #{pane_current_path}"] } }
+  - { key: T, mods: Command, chars: "\x02\x63" }
   - { key: T, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["respawn-pane", "-k"] } }
 
   - { key: LBracket, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["prev"] } }
   - { key: RBracket, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["next"] } }
 
-  - { key: Semicolon,   mods: Command, command: { program: "/usr/local/bin/tmux", args: ["split-window", "-v", "-c #{pane_current_path}"] } }
-  - { key: Apostrophe,  mods: Command, command: { program: "/usr/local/bin/tmux", args: ["split-window", "-h", "-c #{pane_current_path}"] } }
+  - { key: Semicolon,   mods: Command, chars: "\x02\x3a" }
+  - { key: Apostrophe,  mods: Command, chars: "\x02\x22" }
 
   - { key: LBracket, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["previous-layout"] } }
   - { key: RBracket, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["next-layout"] } }
   
-  - { key: Left,  mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-pane", "-L"] } }
-  - { key: Right, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-pane", "-R"] } }
-  - { key: Up,    mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-pane", "-U"] } }
-  - { key: Down,  mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-pane", "-D"] } }
+  - { key: Up,    mods: Command, chars: "\x02\x1b\x5b\x41" }
+  - { key: Down,  mods: Command, chars: "\x02\x1b\x5b\x42" }
+  - { key: Right, mods: Command, chars: "\x02\x1b\x5b\x43" }
+  - { key: Left,  mods: Command, chars: "\x02\x1b\x5b\x44" }
 
-  - { key: Key1, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t 1"] } }
-  - { key: Key2, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t 2"] } }
-  - { key: Key3, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t 3"] } }
-  - { key: Key4, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t 4"] } }
-  - { key: Key5, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t 5"] } }
-  - { key: Key6, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t 6"] } }
-  - { key: Key7, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t 7"] } }
-  - { key: Key8, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t 8"] } }
-  - { key: Key9, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t 9"] } }
+  - { key: Key1, mods: Command, chars: "\x02\x31" }
+  - { key: Key2, mods: Command, chars: "\x02\x32" }
+  - { key: Key3, mods: Command, chars: "\x02\x33" }
+  - { key: Key4, mods: Command, chars: "\x02\x34" }
+  - { key: Key5, mods: Command, chars: "\x02\x35" }
+  - { key: Key6, mods: Command, chars: "\x02\x36" }
+  - { key: Key7, mods: Command, chars: "\x02\x37" }
+  - { key: Key8, mods: Command, chars: "\x02\x38" }
+  - { key: Key9, mods: Command, chars: "\x02\x39" }
