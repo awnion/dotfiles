@@ -28,74 +28,43 @@ font:
 
   use_thin_strokes: true
 
-# colors:
-#   primary:
-#     # background: '#3f0e2f'
-#     # background: '#c5c8c6'
-#     background: '#3a132f'
-#     foreground: '#999998'
-#   cursor:
-#     text: '#000000'
-#     cursor: '#ffffff'
-#   selection:
-#     text: '#eaeaea'
-#     background: '#404040'
-#   normal:
-#     black:   '#1d1f21'
-#     red:     '#cc6666'
-#     green:   '#b5bd68'
-#     yellow:  '#f0c674'
-#     blue:    '#81a2be'
-#     magenta: '#b294bb'
-#     cyan:    '#8abeb7'
-#     white:   '#c5c8c6'
-#   bright:
-#     black:   '#666666'
-#     red:     '#d54e53'
-#     green:   '#b9ca4a'
-#     yellow:  '#e7c547'
-#     blue:    '#7aa6da'
-#     magenta: '#c397d8'
-#     cyan:    '#70c0b1'
-#     white:   '#eaeaea'
-#   dim:
-#     black:   '#131415'
-#     red:     '#864343'
-#     green:   '#777c44'
-#     yellow:  '#9e824c'
-#     blue:    '#556a7d'
-#     magenta: '#75617b'
-#     cyan:    '#5b7d78'
-#     white:   '#828482'
-
-# Solarized light
 colors:
-  # Default colors
   primary:
-    background: '0xfdf6e3'
-    foreground: '0x586e75'
-
-  # Normal colors
+    background: '#3a132f'
+    foreground: '#999998'
+  cursor:
+    text: '#000000'
+    cursor: '#ffffff'
+  selection:
+    text: '#eaeaea'
+    background: '#404040'
   normal:
-    black:   '0x073642'
-    red:     '0xdc322f'
-    green:   '0x859900'
-    yellow:  '0xb58900'
-    blue:    '0x268bd2'
-    magenta: '0xd33682'
-    cyan:    '0x2aa198'
-    white:   '0xeee8d5'
-
-  # Bright colors
+    black:   '#1d1f21'
+    red:     '#cc6666'
+    green:   '#b5bd68'
+    yellow:  '#f0c674'
+    blue:    '#81a2be'
+    magenta: '#b294bb'
+    cyan:    '#8abeb7'
+    white:   '#c5c8c6'
   bright:
-    black:   '0x002b36'
-    red:     '0xcb4b16'
-    green:   '0x586e75'
-    yellow:  '0x657b83'
-    blue:    '0x839496'
-    magenta: '0x6c71c4'
-    cyan:    '0x93a1a1'
-    white:   '0xfdf6e3'
+    black:   '#666666'
+    red:     '#d54e53'
+    green:   '#b9ca4a'
+    yellow:  '#e7c547'
+    blue:    '#7aa6da'
+    magenta: '#c397d8'
+    cyan:    '#70c0b1'
+    white:   '#eaeaea'
+  dim:
+    black:   '#131415'
+    red:     '#864343'
+    green:   '#777c44'
+    yellow:  '#9e824c'
+    blue:    '#556a7d'
+    magenta: '#75617b'
+    cyan:    '#5b7d78'
+    white:   '#828482'
 
 selection:
   save_to_clipboard: false
@@ -104,37 +73,35 @@ cursor:
   style: Block 
 
 key_bindings:
-  # use "xxd" outside of tmux to find out codes for chars
-  # - { key: Q, mods: Command, action: None }
-  - { key: A, mods: Command, chars: "\x02\x77" }  # ^Bw
+  # use "xxd" outside of tmux to find out codes for chars (e.g. ^B = \x02)
   - { key: Y, mods: Command, command: { program: "/bin/zsh", args: ["-l", "-c", "env | tee /tmp/alacritty_env"] } }
   - { key: R, mods: Command, command: { program: "/bin/zsh", args: ["-l", "-c", "tmux display-message 'Reload config'; tmux source-file ~/.tmux.conf"] } }
 
-  - { key: W, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["kill-pane"] } }
-  - { key: W, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["kill-window"] } }
-  - { key: T, mods: Command, chars: "\x02\x63" }
-  - { key: T, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["respawn-pane", "-k"] } }
-
-  - { key: LBracket, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["prev"] } }
-  - { key: RBracket, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["next"] } }
-
-  - { key: Semicolon,   mods: Command, chars: "\x02\x3a" }
-  - { key: Apostrophe,  mods: Command, chars: "\x02\x22" }
-
-  - { key: LBracket, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["previous-layout"] } }
-  - { key: RBracket, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["next-layout"] } }
-  
-  - { key: Up,    mods: Command, chars: "\x02\x1b\x5b\x41" }
-  - { key: Down,  mods: Command, chars: "\x02\x1b\x5b\x42" }
-  - { key: Right, mods: Command, chars: "\x02\x1b\x5b\x43" }
-  - { key: Left,  mods: Command, chars: "\x02\x1b\x5b\x44" }
-
-  - { key: Key1, mods: Command, chars: "\x02\x31" }
-  - { key: Key2, mods: Command, chars: "\x02\x32" }
-  - { key: Key3, mods: Command, chars: "\x02\x33" }
-  - { key: Key4, mods: Command, chars: "\x02\x34" }
-  - { key: Key5, mods: Command, chars: "\x02\x35" }
-  - { key: Key6, mods: Command, chars: "\x02\x36" }
-  - { key: Key7, mods: Command, chars: "\x02\x37" }
-  - { key: Key8, mods: Command, chars: "\x02\x38" }
-  - { key: Key9, mods: Command, chars: "\x02\x39" }
+  # !!!MAC ONLY!!!
+  # tmux proxy commands
+  - { key: Q,          mods: Command,       action:  None }
+  - { key: Q,          mods: Command|Shift, action:  Quit }
+  - { key: A,          mods: Command,       chars:   "\x02\x77" }  # ^Bw
+  - { key: W,          mods: Command,       chars:   "\x02x" } # kill-pane
+  - { key: W,          mods: Command|Shift, chars:   "\x02&" } # kill-window
+  - { key: T,          mods: Command,       chars:   "\x02c" } # new-window
+  - { key: L,          mods: Command,       chars:   "\x02 " } # next-layout
+  - { key: Comma,      mods: Command,       chars:   "\x02{" } # swap-pane
+  - { key: Period,     mods: Command,       chars:   "\x02}" } # swap-pane
+  - { key: LBracket,   mods: Command|Shift, chars:   "\x02p" } # next-window
+  - { key: RBracket,   mods: Command|Shift, chars:   "\x02n" } # previous-window
+  - { key: Semicolon,  mods: Command,       chars:   "\x02;" } # split-pane -
+  - { key: Apostrophe, mods: Command,       chars:   "\x02'" } # split-pane |
+  - { key: Up,         mods: Command,       chars:   "\x02\x1b\x5b\x41" }
+  - { key: Down,       mods: Command,       chars:   "\x02\x1b\x5b\x42" }
+  - { key: Right,      mods: Command,       chars:   "\x02\x1b\x5b\x43" }
+  - { key: Left,       mods: Command,       chars:   "\x02\x1b\x5b\x44" }
+  - { key: Key1,       mods: Command,       chars:   "\x02\x31" }  # ^B1
+  - { key: Key2,       mods: Command,       chars:   "\x02\x32" }  # ^B2
+  - { key: Key3,       mods: Command,       chars:   "\x02\x33" }  # ^B3
+  - { key: Key4,       mods: Command,       chars:   "\x02\x34" }  # ^B4
+  - { key: Key5,       mods: Command,       chars:   "\x02\x35" }  # ^B5
+  - { key: Key6,       mods: Command,       chars:   "\x02\x36" }  # ^B6
+  - { key: Key7,       mods: Command,       chars:   "\x02\x37" }  # ^B7
+  - { key: Key8,       mods: Command,       chars:   "\x02\x38" }  # ^B8
+  - { key: Key9,       mods: Command,       chars:   "\x02\x39" }  # ^B9
