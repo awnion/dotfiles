@@ -3,6 +3,11 @@
 env:
   TERM: alacritty
 
+shell:
+  program: /bin/zsh
+  args:
+    - --login
+
 window:
   dynamic_title: true
   padding:
@@ -20,57 +25,51 @@ font:
     family: "Iosevka Nerd Font Mono"
     style: Regular
   bold:
-    style: Bold  
-  size: 18
+    style: Bold
+  size: 20
   offset:
+    x: 0
+    y: 0
+  glyph_offset:
     x: 0
     y: 0
 
   use_thin_strokes: true
 
+# Colors (Ubuntu)
 colors:
+  name: Brewer (light)
+  author: Chris Kempson
   primary:
-    background: '#3a132f'
-    foreground: '#999998'
+    background: "#fcfdfe"
+    foreground: "#515253"
   cursor:
-    text: '#000000'
-    cursor: '#ffffff'
-  selection:
-    text: '#eaeaea'
-    background: '#404040'
+    text: "#fcfdfe"
+    cursor: "#515253"
   normal:
-    black:   '#1d1f21'
-    red:     '#cc6666'
-    green:   '#b5bd68'
-    yellow:  '#f0c674'
-    blue:    '#81a2be'
-    magenta: '#b294bb'
-    cyan:    '#8abeb7'
-    white:   '#c5c8c6'
+    black: "#0c0d0e"
+    red: "#e31a1c"
+    green: "#31a354"
+    yellow: "#dca060"
+    blue: "#3182bd"
+    magenta: "#756bb1"
+    cyan: "#80b1d3"
+    white: "#b7b8b9"
   bright:
-    black:   '#666666'
-    red:     '#d54e53'
-    green:   '#b9ca4a'
-    yellow:  '#e7c547'
-    blue:    '#7aa6da'
-    magenta: '#c397d8'
-    cyan:    '#70c0b1'
-    white:   '#eaeaea'
-  dim:
-    black:   '#131415'
-    red:     '#864343'
-    green:   '#777c44'
-    yellow:  '#9e824c'
-    blue:    '#556a7d'
-    magenta: '#75617b'
-    cyan:    '#5b7d78'
-    white:   '#828482'
+    black: "#737475"
+    red: "#e31a1c"
+    green: "#31a354"
+    yellow: "#dca060"
+    blue: "#3182bd"
+    magenta: "#756bb1"
+    cyan: "#80b1d3"
+    white: "#fcfdfe"
 
 selection:
   save_to_clipboard: false
 
 cursor:
-  style: Block 
+  style: Block
 
 key_bindings:
   # use "xxd" outside of tmux to find out codes for chars (e.g. ^B = \x02)
@@ -90,8 +89,8 @@ key_bindings:
   - { key: Period,     mods: Command,       chars:   "\x02}" } # swap-pane
   - { key: LBracket,   mods: Command|Shift, chars:   "\x02p" } # next-window
   - { key: RBracket,   mods: Command|Shift, chars:   "\x02n" } # previous-window
-  - { key: Semicolon,  mods: Command,       chars:   "\x02;" } # split-pane -
-  - { key: Apostrophe, mods: Command,       chars:   "\x02'" } # split-pane |
+  - { key: Semicolon,  mods: Command,       chars:   "\x02:" } # split-pane -
+  - { key: Apostrophe, mods: Command,       chars:   "\x02\""} # split-pane |
   - { key: Up,         mods: Command,       chars:   "\x02\x1b\x5b\x41" }
   - { key: Down,       mods: Command,       chars:   "\x02\x1b\x5b\x42" }
   - { key: Right,      mods: Command,       chars:   "\x02\x1b\x5b\x43" }
