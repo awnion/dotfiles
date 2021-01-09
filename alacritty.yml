@@ -1,7 +1,7 @@
 # based on default config: https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 env:
-  TERM: alacritty
+  TERM: xterm-256color
 
 shell:
   program: /bin/zsh
