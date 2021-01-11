@@ -4,6 +4,8 @@ set mouse=a
 sy on
 set numberwidth=5
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+setlocal colorcolumn=80
+setlocal path=.,**
 
 set clipboard=unnamed
 
@@ -12,6 +14,8 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+set softtabstop=4
+set expandtab
 set shiftwidth=4
 set tabstop=4
 set encoding=utf8
