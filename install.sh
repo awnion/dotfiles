@@ -17,3 +17,4 @@ fi
 (cd ~; rm -rf .tmux.conf; ln -s $DOTFILES_DIR/.tmux.conf .tmux.conf)
 (cd ~; rm -rf .vimrc; ln -s $DOTFILES_DIR/.vimrc .vimrc)
 (cd ~; rm -rf .zshrc; ln -s $DOTFILES_DIR/.zshrc .zshrc)
+(cd ~/.config; rm -rf wezterm; ln -s $DOTFILES_DIR/wezterm wezterm)
