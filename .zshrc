@@ -46,16 +46,29 @@ export MANPAGER='less'
 
 alias ipy='ipython3'
 
+# Vim
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+set -o vi
+MODE_INDICATOR="%F{yellow}+%f"
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+VI_MODE_SET_CURSOR=true
+
 
 # antigen
-source /usr/local/share/antigen/antigen.zsh
-antigen reset
+[[ ! -d "$HOME/.antigen" ]] && git clone https://github.com/zsh-users/antigen.git "$HOME/.antigen"
+source "$HOME/.antigen/antigen.zsh"
+# source /usr/local/share/antigen/antigen.zsh
+# antigen reset
 antigen use oh-my-zsh
 antigen bundle django
 antigen bundle docker
 antigen bundle docker-compose
 antigen bundle git
 antigen bundle pip
+antigen bundle tmux
+antigen bundle vi-mode
+
 # antigen bundle zsh_reload
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle marlonrichert/zsh-autocomplete
@@ -63,9 +76,9 @@ antigen bundle marlonrichert/zsh-autocomplete
 antigen bundle popstas/zsh-command-time
 
 # May be useful
-# antigen bundle command-not-found
+# antigen bundle command-not-found # slow!
 # antigen bundle web-search
-# antigen bundle zsh-navigation-tools
+# antigen bundle zsh-navigation-tools # C-r search
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     antigen bundle osx
@@ -78,4 +91,6 @@ antigen apply
 # settings for marlonrichert/zsh-autocomplete
 zstyle ':autocomplete:tab:*' insert-unambiguous yes     # make Tab first insert any common substring, before inserting full completion
 zstyle ':autocomplete:tab:*' widget-style menu-complete # circular Tab and Shift-Tab for completion
-zstyle ':autocomplete:*' min-delay .3  # 300 milliseconds
+zstyle ':autocomplete:*' min-delay .3
+
+bindkey -v
