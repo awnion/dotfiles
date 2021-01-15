@@ -2,8 +2,10 @@ set noswapfile
 set nu
 set mouse=a
 sy on
+colorscheme zellner
 set numberwidth=5
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+highlight LineNr ctermfg=black ctermbg=gray
 setlocal colorcolumn=80
 setlocal path=.,**
 
