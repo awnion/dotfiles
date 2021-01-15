@@ -7,6 +7,8 @@ shell:
   program: /bin/zsh
   args:
     - --login
+    - -c
+    - "tmux attach || tmux"
 
 window:
   dynamic_title: true
@@ -22,17 +24,17 @@ scrolling:
 
 font:
   normal:
-    family: "Iosevka Nerd Font Mono"
-    style: Regular
-  bold:
+    family: "Iosevka Nerd Font"
     style: Bold
+  bold:
+    style: Light
   size: 20
   offset:
     x: 0
     y: 0
   glyph_offset:
     x: 0
-    y: 0
+    y: 1
 
   use_thin_strokes: true
 
@@ -41,8 +43,8 @@ colors:
   name: Brewer (light)
   author: Chris Kempson
   primary:
-    background: "#fcfdfe"
-    foreground: "#515253"
+    background: "#ffffff"
+    foreground: "#111111"
   cursor:
     text: "#fcfdfe"
     cursor: "#515253"
