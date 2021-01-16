@@ -12,9 +12,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # defaults delete -g ApplePressAndHoldEnabled                                      # If necessary, reset global default
 fi
 
-(cd ~; rm -rf .gitconfig; ln -s $DOTFILES_DIR/.gitconfig .gitconfig)
-(cd ~/.config/alacritty; rm -rf alacritty.yml; ln -s $DOTFILES_DIR/alacritty.yml alacritty.yml)
-(cd ~; rm -rf .tmux.conf; ln -s $DOTFILES_DIR/.tmux.conf .tmux.conf)
-(cd ~; rm -rf .vimrc; ln -s $DOTFILES_DIR/.vimrc .vimrc)
-(cd ~; rm -rf .zshrc; ln -s $DOTFILES_DIR/.zshrc .zshrc)
-(cd ~/.config; rm -rf wezterm; ln -s $DOTFILES_DIR/wezterm wezterm)
+(cd $HOME; rm -rf .gitconfig; ln -s $DOTFILES_DIR/.gitconfig .gitconfig)
+(cd $HOME/.config/alacritty; rm -rf alacritty.yml; ln -s $DOTFILES_DIR/alacritty.yml alacritty.yml)
+(cd $HOME; rm -rf .tmux.conf; ln -s $DOTFILES_DIR/tmux.conf .tmux.conf)
+(cd $HOME; rm -rf .vimrc; ln -s $DOTFILES_DIR/vimrc .vimrc)
+(cd $HOME; rm -rf .zshrc; ln -s $DOTFILES_DIR/zshrc .zshrc)
+(cd $HOME; rm -rf .zprofile; ln -s $DOTFILES_DIR/zprofile .zprofile)
+(cd $HOME/.config; rm -rf wezterm; ln -s $DOTFILES_DIR/wezterm wezterm)
