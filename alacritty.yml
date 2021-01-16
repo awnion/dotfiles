@@ -74,6 +74,7 @@ selection:
 
 cursor:
   style: Block
+  unfocused_hollow: true
 
 key_bindings:
   # use "xxd" outside of tmux to find out codes for chars (e.g. ^B = \x02)

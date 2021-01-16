@@ -1,5 +1,22 @@
 echo "Loading ~/.zshrc"
+# bindkey -v
 
+# bindkey '^P' up-history
+# bindkey '^N' down-history
+# bindkey '^?' backward-delete-char
+# bindkey '^h' backward-delete-char
+# bindkey '^w' backward-kill-word
+# bindkey '^r' history-incremental-search-backward
+
+# function zle-line-init zle-keymap-select {
+#     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+#     RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
+#     zle reset-prompt
+# }
+
+# zle -N zle-line-init
+# zle -N zle-keymap-select
+export KEYTIMEOUT=1
 
 # paths
 export PATH=/usr/local/bin:$PATH
@@ -15,7 +32,7 @@ export ZSH_HIGHLIGHT_MAXLENGTH=200
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 export ZSH_COMMAND_TIME_MIN_SECONDS=1
 
-HISTFILE="$HOME/.zhistory"
+HISTFILE="$HOME/.cache/zsh/zhistory"
 HISTSIZE=10000000
 SAVEHIST=10000000
 
@@ -45,6 +62,7 @@ export MANPAGER='less'
 
 
 alias ipy='ipython3'
+alias weather='clear && echo "Weather" && curl "http://wttr.in/?Tn0Fq"'
 
 # Vim
 export VISUAL=nvim
@@ -56,22 +74,19 @@ VI_MODE_SET_CURSOR=true
 
 
 # antigen
-[[ ! -d "$HOME/.antigen" ]] && git clone https://github.com/zsh-users/antigen.git "$HOME/.antigen"
-source "$HOME/.antigen/antigen.zsh"
-# source /usr/local/share/antigen/antigen.zsh
-# antigen reset
+[[ ! -d "$HOME/.config/antigen" ]] && git clone https://github.com/zsh-users/antigen.git "$HOME/.config/antigen"
+source "$HOME/.config/antigen/antigen.zsh"
 antigen use oh-my-zsh
+antigen bundle marlonrichert/zsh-autocomplete
 antigen bundle django
 antigen bundle docker
 antigen bundle docker-compose
 antigen bundle git
 antigen bundle pip
 antigen bundle tmux
-antigen bundle vi-mode
 
 # antigen bundle zsh_reload
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle marlonrichert/zsh-autocomplete
 
 antigen bundle popstas/zsh-command-time
 
@@ -92,5 +107,4 @@ antigen apply
 zstyle ':autocomplete:tab:*' insert-unambiguous yes     # make Tab first insert any common substring, before inserting full completion
 zstyle ':autocomplete:tab:*' widget-style menu-complete # circular Tab and Shift-Tab for completion
 zstyle ':autocomplete:*' min-delay .3
-
-bindkey -v
+zstyle ':autocomplete:*' key-binding off
