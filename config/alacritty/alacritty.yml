@@ -15,9 +15,9 @@ shell:
 window:
   dynamic_title: true
   padding:
-    x: 10
-    y: 10
-  decorations: full
+    x: 0
+    y: 0
+  decorations: none 
   startup_mode: Maximized
 
 scrolling:
@@ -30,7 +30,7 @@ font:
     style: Bold
   bold:
     style: Light
-  size: 20
+  size: 22
   offset:
     x: 0
     y: 0
