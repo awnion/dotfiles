@@ -21,7 +21,8 @@ st = status -sb
 pr = pull --rebase
 wc = whatchanged --abbrev-commit --date=relative --date-order --pretty='format:%Cgreen%h %Cblue%ar %Credby %an%Creset -- %s' -n 45
 l   = log -p
-ll  = log --decorate --graph --pretty=format:'%Cred%h%Creset %<(45,trunc)%s %Cgreen%cr%C(auto)%d %C(cyan)<%an>'
+# commitmessage.maxSubjectLength: Default is 50 characters
+ll  = log --decorate --graph --pretty=format:'%Cred%h%Creset %<(50,trunc)%s %Cgreen%cr%C(auto)%d %C(cyan)<%an>'
 lla = ll --all
 gl  = log --decorate --graph --abbrev-commit --color --color-words --topo-order --pretty=medium
 gla = gl --all
