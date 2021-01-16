@@ -1,7 +1,6 @@
 local wezterm = require 'wezterm';
 return {
     font = wezterm.font_with_fallback({
-        "PragmataPro Liga",
         "Iosevka Custom Font Mono",
         "MesloLGS NF",
         "Cascadia Code PL",
