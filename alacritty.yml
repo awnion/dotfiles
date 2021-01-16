@@ -1,4 +1,6 @@
 # based on default config: https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+debug:
+  persistent_logging: false
 
 env:
   TERM: xterm-256color
