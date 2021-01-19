@@ -31,7 +31,7 @@ sla = sl --all
 
 [core]
 autocrlf = input
-excludesfile = ~/.gitignore_global
+excludesfile = ~/.config/gitignore_global
 
 [push]
 default = simple
