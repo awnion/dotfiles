@@ -34,6 +34,8 @@ mkdir -p $HOME/.config
   cd $HOME/.config
   rm -rf alacritty
   rm -rf wezterm
+  rm -rf gitignore_global 
   ln -s $DOTFILES_DIR/config/alacritty alacritty
   ln -s $DOTFILES_DIR/config/wezterm wezterm
+  ln -s $DOTFILES_DIR/config/gitignore_global gitignore_global
 )
