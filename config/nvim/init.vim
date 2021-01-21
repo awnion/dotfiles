@@ -2,16 +2,20 @@ set noswapfile
 set nu
 set mouse=a
 set termguicolors
-set background=light
 sy on
-colorscheme zellner
+" highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+" highlight LineNr ctermfg=black ctermbg=gray
+" colorscheme NeoSolarized
+
+colorscheme one
+set background=light
+
+set showtabline=2
 set numberwidth=5
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-highlight LineNr ctermfg=black ctermbg=gray
-setlocal colorcolumn=80
+set colorcolumn=80,120
 setlocal path=.,**
 
-set clipboard=unnamed
+set clipboard+=unnamedplus
 
 map <C-j> <C-W>j
 map <C-k> <C-W>k
