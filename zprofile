@@ -1,1 +1,1 @@
-echo $PATH
+echo "Loading ~/.zprofile"

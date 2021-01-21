@@ -1,21 +1,5 @@
 echo "Loading ~/.zshrc"
-# bindkey -v
 
-# bindkey '^P' up-history
-# bindkey '^N' down-history
-# bindkey '^?' backward-delete-char
-# bindkey '^h' backward-delete-char
-# bindkey '^w' backward-kill-word
-# bindkey '^r' history-incremental-search-backward
-
-# function zle-line-init zle-keymap-select {
-#     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
-#     RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
-#     zle reset-prompt
-# }
-
-# zle -N zle-line-init
-# zle -N zle-keymap-select
 export KEYTIMEOUT=1
 
 # paths
@@ -28,7 +12,6 @@ export PATH=$HOME/.cargo/bin:$PATH
 
 # settings
 export BAT_THEME=OneHalfLight
-export SOBOLE_THEME_MODE=light
 export ZSH_HIGHLIGHT_MAXLENGTH=200
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 export ZSH_COMMAND_TIME_MIN_SECONDS=1
@@ -48,23 +31,13 @@ setopt HIST_REDUCE_BLANKS     # Remove superfluous blanks before recording entry
 setopt HIST_VERIFY            # Don't execute immediately upon history expansion.
 setopt HIST_BEEP              # Beep when accessing nonexistent history.
 
-# Pagers:
-# This affects every invocation of `less`.
-#   -i   case-insensitive search unless search string contains uppercase letters
-#   -R   color
-#   -F   exit if there is less than one page of content
-#   -X   keep content on screen after exit
-#   -M   show more info at the bottom prompt line
-#   -x4  tabs are 4 instead of 8
-export LESS="-iRFXMx4 --mouse --wheel-lines=2"
-export PAGER='less'
-export MANPAGER='less'
+source ~/.config/pager_config.sh
 
 alias ipy='ipython3'
 function weather() {
-    clear
-    echo "Weather $1 $2"
-    curl "http://wttr.in/${1:-}?${2:-TF0nq}"
+  clear
+  echo "Weather $1 $2"
+  curl "http://wttr.in/${1:-}?${2:-TF0nq}"
 }
 alias wt=weather
 alias wr=weather
@@ -75,14 +48,10 @@ alias vim=nvim
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
-set -o vi
-MODE_INDICATOR="%F{yellow}+%f"
-VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
-VI_MODE_SET_CURSOR=true
-
 # antigen
 [[ ! -d "$HOME/.config/antigen" ]] && git clone https://github.com/zsh-users/antigen.git "$HOME/.config/antigen"
 source "$HOME/.config/antigen/antigen.zsh"
+# antigen reset
 antigen use oh-my-zsh
 antigen bundle marlonrichert/zsh-autocomplete
 antigen bundle django
@@ -97,16 +66,9 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 
 antigen bundle popstas/zsh-command-time
 
-# May be useful
-# antigen bundle command-not-found # slow!
-# antigen bundle web-search
-# antigen bundle zsh-navigation-tools # C-r search
-
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    antigen bundle osx
+  antigen bundle osx
 fi
-
-antigen theme sobolevn/sobole-zsh-theme
 
 antigen apply
 
@@ -115,3 +77,15 @@ zstyle ':autocomplete:tab:*' insert-unambiguous yes     # make Tab first insert 
 zstyle ':autocomplete:tab:*' widget-style menu-complete # circular Tab and Shift-Tab for completion
 zstyle ':autocomplete:*' min-delay .3
 zstyle ':autocomplete:*' key-binding off
+
+# full list of vars: http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+PROMPT=$'%{$fg[blue]%}%D{[%X]}%f %{$fg[white]%}%~%f $(git_prompt_info)[%?]%f\
+%# '
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}["
+ZSH_THEME_GIT_PROMPT_SUFFIX="]%f"
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}*%{$fg[green]%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+# time function format 
+TIMEFMT=$'\n\nCPU\t%P\nuser\t%*U\nsys\t%*S\ntotal\t%*E'
