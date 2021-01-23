@@ -27,9 +27,9 @@ scrolling:
 font:
   normal:
     family: "Iosevka Nerd Font"
-    style: Medium
+    style: Regular
   bold:
-    style: Light
+    style: Bold
   size: 22
   offset:
     x: 0
@@ -44,18 +44,18 @@ font:
 colors:
   primary:
     background: "#fafafa"
-    foreground: "#111111"
+    foreground: "#555555"
   cursor:
     text:       "#fcfdfe"
     cursor:     "#515253"
   normal:
     black:      "#0c0d0e"
     red:        "#e31a1c"
-    green:      "#31a354"
+    green:      "#31aa44"
     yellow:     "#dca060"
     blue:       "#3182bd"
-    magenta:    "#756bb1"
-    cyan:       "#80b1d3"
+    magenta:    "#753bb1"
+    cyan:       "#88aacc"
     white:      "#b7b8b9"
   bright:
     black:      "#111111"
