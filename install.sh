@@ -34,12 +34,12 @@ mkdir -p "$HOME/.config"
   cd $HOME/.config
   rm -rf alacritty
   rm -rf gitignore_global
-  rm -rf pager_config.sh
+  rm -rf lesscolors.sh
   rm -rf nvim
   rm -rf wezterm
   ln -s $DOTFILES_DIR/config/alacritty alacritty
   ln -s $DOTFILES_DIR/config/gitignore_global gitignore_global
-  ln -s $DOTFILES_DIR/config/pager_config.sh pager_config.sh
+  ln -s $DOTFILES_DIR/config/lesscolors.sh lesscolors.sh
   ln -s $DOTFILES_DIR/config/nvim nvim
   ln -s $DOTFILES_DIR/config/wezterm wezterm
 )
