@@ -33,11 +33,13 @@ mkdir -p "$HOME/.config"
 (
   cd $HOME/.config
   rm -rf alacritty
+  rm -rf htop
   rm -rf gitignore_global
   rm -rf lesscolors.sh
   rm -rf nvim
   rm -rf wezterm
   ln -s $DOTFILES_DIR/config/alacritty alacritty
+  ln -s $DOTFILES_DIR/config/htop htop
   ln -s $DOTFILES_DIR/config/gitignore_global gitignore_global
   ln -s $DOTFILES_DIR/config/lesscolors.sh lesscolors.sh
   ln -s $DOTFILES_DIR/config/nvim nvim
