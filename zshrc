@@ -53,25 +53,40 @@ export PATH=/usr/local/opt/ruby/bin:$PATH
 export PATH=$HOME/.gem/ruby/3.0.0/bin:$PATH
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
+# use GNU coreutils by their default names (e.g. dircolors)
+# break `ls` compatibility 
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 # settings
-BAT_THEME=OneHalfLight
+eval "$(gdircolors -b)"
+alias ls='gls --color=always'
+alias rm='rm -i'
+export BAT_THEME=OneHalfLight
+alias cat='bat'
 ZSH_HIGHLIGHT_MAXLENGTH=200
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_COMMAND_TIME_MIN_SECONDS=1
 
 # python venv trick
 # TODO: generalize mb?
-VIRTUAL_ENV_DISABLE_PROMPT=1
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 function python_venv {
   echo "${VIRTUAL_ENV:-}" | sed -E 's:.*/([^/]+/[^/]+)$:(\1) :'
+}
+function venv {
+  local -a venv_cases
+  venv_cases+=( ".venv/bin/activate" )
+  venv_cases+=( "venv/bin/activate" )
+  for v in $venv_cases; do
+    [[ -z "$VIRTUAL_ENV" ]] && [[ -f $v ]] && . "$v" && echo "activate $v"
+  done
 }
 
 # ? mb make standalone theme ?
 # full list of vars: http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-PROMPT=$'[code = %?]\
-%F{cyan}%D{[%X]}%f %~ $(git_super_status)\
-%B%F{magenta}$(python_venv)%f%b%B%#%b '
+PROMPT=$'%K{black}%B%F{yellow} --------- { %? } --------- %b%f%k\
+%D{[%X]} %B%~%b $(git_super_status)\
+%F{magenta}$(python_venv)%f%B%#%b '
 
 # never use right prompt
 RPROMPT=''
@@ -84,6 +99,7 @@ ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
 # time function format 
 TIMEFMT=$'\n\nCPU\t%P\nuser\t%*U\nsys\t%*S\ntotal\t%*E'
 
+alias py=ipython3
 alias ipy=ipython3
 function weather() {
   clear
@@ -104,6 +120,12 @@ alias vim=nvim
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
+# smart cd
+cd() {
+  builtin cd "${@}" && \
+  COLUMNS=$(tput cols) CLICOLOR_FORCE=1 ls -FCA | tail -5
+}
+
 # Pagers:
 # This affects every invocation of `less`.
 #   -i   case-insensitive search unless search string contains uppercase letters
@@ -114,5 +136,14 @@ export EDITOR="$VISUAL"
 #   -x#  tabs are # instead of 8
 #   -j#  skip first # lines from the top of the screen then search
 export LESS="-ij5RFXMx4 --mouse --wheel-lines=2"
-export PAGER="(. $HOME/.config/lesscolors.sh;less)"
-export MANPAGER="(. $HOME/.config/lesscolors.sh;less)"
+
+export PAGER=". $HOME/.config/lesscolors.sh; less"
+export MANPAGER=". $HOME/.config/lesscolors.sh; less"
+
+export FZF_DEFAULT_COMMAND='fd'
+# generator here https://minsw.github.io/fzf-color-picker/
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' 
+  --color=fg:#555555,bg:#fafafa,hl:#ff4747 
+  --color=fg+:#2e2e2e,bg+:#eaeaea,hl+:#ff0000 
+  --color=info:#ac84ad,prompt:#ff0000,pointer:#008cff 
+  --color=marker:#cc62cc,spinner:#5c61ff,header:#5d9191'
