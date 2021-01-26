@@ -45,3 +45,11 @@ mkdir -p "$HOME/.config"
   ln -s $DOTFILES_DIR/config/nvim nvim
   ln -s $DOTFILES_DIR/config/wezterm wezterm
 )
+
+mkdir -p "$HOME/bin"
+(
+  cd $HOME/bin
+  rm -rf colorless
+  ln -s $DOTFILES_DIR/bin/colorless colorless
+  chmod +x colorless
+)
