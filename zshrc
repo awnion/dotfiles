@@ -1,6 +1,9 @@
 echo "Loading ~/.zshrc"
 
+
+##############################
 # history
+##############################
 HISTFILE="$HOME/.cache/zsh/zhistory"
 HISTSIZE=10000000
 SAVEHIST=10000000
@@ -15,12 +18,14 @@ setopt HIST_REDUCE_BLANKS     # Remove superfluous blanks before recording entry
 setopt HIST_VERIFY            # Don't execute immediately upon history expansion.
 setopt HIST_BEEP              # Beep when accessing nonexistent history.
 
+
+##############################
 # antigen
+##############################
 if [[ ! -d "$HOME/.config/antigen" ]]; then
   git clone https://github.com/zsh-users/antigen.git "$HOME/.config/antigen"
 fi
 source "$HOME/.config/antigen/antigen.zsh"
-antigen reset
 antigen use oh-my-zsh
 antigen bundle marlonrichert/zsh-autocomplete
 antigen bundle django
@@ -30,6 +35,8 @@ antigen bundle git
 antigen bundle git-prompt
 antigen bundle pip
 antigen bundle tmux
+# doesn't work properly with zsh-autocomplete (yet)
+# antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle popstas/zsh-command-time
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -44,57 +51,145 @@ zstyle ':autocomplete:tab:*' widget-style menu-complete # circular Tab and Shift
 zstyle ':autocomplete:*' min-delay .3
 zstyle ':autocomplete:*' key-binding off
 
+# Esc timeout for vi mode
 export KEYTIMEOUT=1
 
+
+##############################
 # paths
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
-export PATH=/usr/local/opt/ruby/bin:$PATH
-export PATH=$HOME/.gem/ruby/3.0.0/bin:$PATH
-export PATH=$HOME/bin:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
+##############################
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
 # use GNU coreutils by their default names (e.g. dircolors)
 # break `ls` compatibility 
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+# ~/bin always overrides everything
+export PATH="$HOME/bin:$PATH"
 
-# settings
-eval "$(gdircolors -b)"
-alias ls='gls --color=always'
-alias rm='rm -i'
-export BAT_THEME=OneHalfLight
-alias cat='bat'
-ZSH_HIGHLIGHT_MAXLENGTH=200
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
-ZSH_COMMAND_TIME_MIN_SECONDS=1
 
-# python venv trick
-# TODO: generalize mb?
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-function python_venv {
-  echo "${VIRTUAL_ENV:-}" | sed -E 's:.*/([^/]+/[^/]+)$:(\1) :'
-}
-function venv {
-  local -a venv_cases
-  venv_cases+=( ".venv/bin/activate" )
-  venv_cases+=( "venv/bin/activate" )
-  for v in $venv_cases; do
-    [[ -z "$VIRTUAL_ENV" ]] && [[ -f $v ]] && . "$v" && echo "activate $v"
-  done
-}
-
-# ? mb make standalone theme ?
+##############################
+# prompt
+##############################
 # full list of vars: http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-PROMPT=$'%K{black}%B%F{yellow} --------- { %? } --------- %b%f%k\
-%D{[%X]} %B%~%b $(git_super_status)\
-%F{magenta}$(python_venv)%f%B%#%b '
+PROMPT=$'\
+%B%(?..%F{red})[%?]%b %D{[%X]}%f %B%~%b $(git_super_status) %F{magenta}$(python_venv)%f\
+%B>>> %b'
 
 # never use right prompt
 RPROMPT=''
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{blue}%B "
-ZSH_THEME_GIT_PROMPT_SUFFIX="%b"
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_BRANCH=""
 ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
+
+# EXIT_CODE=
+# function _catch_exit {
+#   export EXIT_CODE=$1
+#   echo "$0 $@" >> 1.txt
+#   echo "EXIT $EXIT_CODE"
+# }
+
+# function exit_code {
+#   echo "$0 $@ $EXIT_CODE" >> 1.txt
+#   if [[ $EXIT_CODE -eq 0 ]]; then
+#   # if (( $EDIT_CODE > 0 )); then
+#     echo "%K{red}%B%F{black}  $EXIT_CODE  %b%f%k"
+#   else
+#     echo "%K{green}%F{black}  $EXIT_CODE  %f%k"
+#   fi
+# }
+
+# TODO: generalize mb?
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+function python_venv {
+  if [[ ! -z "$VIRTUAL_ENV" ]]; then
+    echo "$VIRTUAL_ENV" | sed -E 's:.*/([^/]+/[^/]+)$:(\1) :'
+  fi
+}
+##############################
+# Vim
+##############################
+alias vi=nvim
+alias vim=nvim
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
+##############################
+# Pagers
+##############################
+# This affects every invocation of `less`.
+#   -i   case-insensitive search unless search string contains uppercase letters
+#   -R   color
+#   -F   exit if there is less than one page of content
+#   -X   keep content on screen after exit
+#   -M   show more info at the bottom prompt line
+#   -x#  tabs are # instead of 8
+#   -j#  skip first # lines from the top of the screen then search
+export LESS="-ij5RFXMx4 --mouse --wheel-lines=2"
+export PAGER='colorless'
+export MANPAGER='colorless'
+alias less='colorless'
+
+
+##############################
+# FZF settings
+##############################
+export FZF_DEFAULT_COMMAND='fd'
+# generator here https://minsw.github.io/fzf-color-picker/
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=fg:#555555,bg:#fafafa,hl:#ff4747"
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=fg+:#2e2e2e,bg+:#eaeaea,hl+:#ff0000"
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=info:#ac84ad,prompt:#ff0000,pointer:#008cff"
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=marker:#cc62cc,spinner:#5c61ff,header:#5d9191"
+
+
+##############################
+# random settings
+##############################
+
+# Turns on colors with default unix `ls` command:
+export CLICOLOR=1
+
+# ls colors could be generated here: https://geoff.greer.fm/lscolors/
+# but seems like GNU dircolors with GNU ls is better
+# setup LS_COLORS
+eval "$(gdircolors -b)"
+export LSCOLORS="exfxcxdxBxegedabagacab"
+
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# TODO: refactor this
+alias ls='ls --color=always -FCA'
+alias rm='rm -i'
+export BAT_THEME=OneHalfLight
+# alias cat='cat | bat'
+ZSH_HIGHLIGHT_MAXLENGTH=200
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+ZSH_COMMAND_TIME_MIN_SECONDS=1
+
+# smart cd
+cd() {
+  builtin cd $@ && \
+  COLUMNS=$(tput cols) ls --color=always -FCA | tail -5
+}
+
+# python venv trick
+function venv {
+  local -a venv_cases
+  venv_cases+=( ".venv/bin/activate" )
+  venv_cases+=( "venv/bin/activate" )
+  for v in $venv_cases; do
+    if [[ -z "$VIRTUAL_ENV" ]] && [[ -f $v ]]; then
+      . "$v"
+      echo "activate $v"
+    fi 
+  done
+}
+
+# ? mb make standalone theme ?
 
 # time function format 
 TIMEFMT=$'\n\nCPU\t%P\nuser\t%*U\nsys\t%*S\ntotal\t%*E'
@@ -113,37 +208,3 @@ function color_table() {
     echo "$(tput setab $i)Bcolor$i$(tput sgr0)$(tput setaf $i)Fcolor$i$(tput sgr0)"
   done
 }
-
-# Vim
-alias vi=nvim
-alias vim=nvim
-export VISUAL=nvim
-export EDITOR="$VISUAL"
-
-# smart cd
-cd() {
-  builtin cd "${@}" && \
-  COLUMNS=$(tput cols) CLICOLOR_FORCE=1 ls -FCA | tail -5
-}
-
-# Pagers:
-# This affects every invocation of `less`.
-#   -i   case-insensitive search unless search string contains uppercase letters
-#   -R   color
-#   -F   exit if there is less than one page of content
-#   -X   keep content on screen after exit
-#   -M   show more info at the bottom prompt line
-#   -x#  tabs are # instead of 8
-#   -j#  skip first # lines from the top of the screen then search
-export LESS="-ij5RFXMx4 --mouse --wheel-lines=2"
-
-export PAGER=". $HOME/.config/lesscolors.sh; less"
-export MANPAGER=". $HOME/.config/lesscolors.sh; less"
-
-export FZF_DEFAULT_COMMAND='fd'
-# generator here https://minsw.github.io/fzf-color-picker/
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' 
-  --color=fg:#555555,bg:#fafafa,hl:#ff4747 
-  --color=fg+:#2e2e2e,bg+:#eaeaea,hl+:#ff0000 
-  --color=info:#ac84ad,prompt:#ff0000,pointer:#008cff 
-  --color=marker:#cc62cc,spinner:#5c61ff,header:#5d9191'
