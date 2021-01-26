@@ -44,10 +44,10 @@ font:
 colors:
   primary:
     background: "#fafafa"
-    foreground: "#555555"
+    foreground: "#616161"
   cursor:
-    text:       "#fcfdfe"
-    cursor:     "#515253"
+    text:       "#212121"
+    cursor:     "#76FF03"
   normal:
     black:      "#0c0d0e"
     red:        "#e31a1c"
@@ -58,6 +58,15 @@ colors:
     cyan:       "#88aacc"
     white:      "#b7b8b9"
   bright:
+    black:      "#0c0d0e"
+    red:        "#e31a1c"
+    green:      "#31aa44"
+    yellow:     "#dca060"
+    blue:       "#3182bd"
+    magenta:    "#753bb1"
+    cyan:       "#88aacc"
+    white:      "#ffffff"
+  dim:
     black:      "#111111"
     red:        "#d64a42"
     green:      "#64a550"
