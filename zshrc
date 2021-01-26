@@ -75,33 +75,16 @@ export PATH="$HOME/bin:$PATH"
 ##############################
 # full list of vars: http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 PROMPT=$'\
-%B%(?..%F{red})[%?]%b %D{[%X]}%f %B%~%b $(git_super_status) %F{magenta}$(python_venv)%f\
+%B%(?..%F{red})[%?]%b %F{white}%D{[%X]}%f %B%~%b $(git_super_status) %F{magenta}%B$(python_venv)%b%f\
 %B>>> %b'
 
 # never use right prompt
 RPROMPT=''
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{blue}%B "
-ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_BRANCH=""
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{cyan}%B"
+ZSH_THEME_GIT_PROMPT_SUFFIX=" "
+ZSH_THEME_GIT_PROMPT_BRANCH=" "
 ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
-
-# EXIT_CODE=
-# function _catch_exit {
-#   export EXIT_CODE=$1
-#   echo "$0 $@" >> 1.txt
-#   echo "EXIT $EXIT_CODE"
-# }
-
-# function exit_code {
-#   echo "$0 $@ $EXIT_CODE" >> 1.txt
-#   if [[ $EXIT_CODE -eq 0 ]]; then
-#   # if (( $EDIT_CODE > 0 )); then
-#     echo "%K{red}%B%F{black}  $EXIT_CODE  %b%f%k"
-#   else
-#     echo "%K{green}%F{black}  $EXIT_CODE  %f%k"
-#   fi
-# }
 
 # TODO: generalize mb?
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -165,7 +148,6 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 alias ls='ls --color=always -FCA'
 alias rm='rm -i'
 export BAT_THEME=OneHalfLight
-# alias cat='cat | bat'
 ZSH_HIGHLIGHT_MAXLENGTH=200
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_COMMAND_TIME_MIN_SECONDS=1
@@ -205,6 +187,6 @@ alias wt=weather
 alias wr=weather
 function color_table() {
   for i in $(seq 0 ${1:-20}); do 
-    echo "$(tput setab $i)Bcolor$i$(tput sgr0)$(tput setaf $i)Fcolor$i$(tput sgr0)"
+    echo "$(tput setab $i)Bcolor$i$(tput sgr0) $(tput setaf $i)Fcolor$i$(tput sgr0) $(tput setab $i)$(tput setaf 15)BFcolor$i$(tput sgr0) $(tput setab $i)$(tput setaf 8)BFcolor$i$(tput sgr0)"
   done
 }
