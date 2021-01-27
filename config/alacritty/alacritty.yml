@@ -17,7 +17,7 @@ window:
   padding:
     x: 0
     y: 0
-  decorations: none 
+  decorations: none
   startup_mode: Maximized
 
 scrolling:
@@ -39,7 +39,7 @@ font:
     y: 0
 
   use_thin_strokes: true
-  
+
 # Atom One Light
 colors:
   primary:

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# preset colors for less without adding 
+# preset colors for less without adding
 # noice to the global environment
 
 # Color support for 'man' and 'git --help' in less

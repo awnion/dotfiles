@@ -61,7 +61,7 @@ export KEYTIMEOUT=1
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 # use GNU coreutils by their default names (e.g. dircolors)
-# break `ls` compatibility 
+# break `ls` compatibility
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"
@@ -75,7 +75,7 @@ export PATH="$HOME/bin:$PATH"
 ##############################
 # full list of vars: http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 PROMPT=$'\
-%B%(?..%F{red})[%?]%b %F{white}%D{[%X]}%f %B%~%b $(git_super_status) %F{magenta}%B$(python_venv)%b%f\
+%B%(?..%F{red})[$(printf "%03d" $?)]%b %F{white}%D{[%X]}%f %B%~%b $(git_super_status) %F{magenta}%B$(python_venv)%b%f\
 %B>>> %b'
 
 # never use right prompt
@@ -139,7 +139,7 @@ export CLICOLOR=1
 # ls colors could be generated here: https://geoff.greer.fm/lscolors/
 # but seems like GNU dircolors with GNU ls is better
 # setup LS_COLORS
-eval "$(gdircolors -b)"
+eval "$(dircolors -b)"
 export LSCOLORS="exfxcxdxBxegedabagacab"
 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -167,13 +167,13 @@ function venv {
     if [[ -z "$VIRTUAL_ENV" ]] && [[ -f $v ]]; then
       . "$v"
       echo "activate $v"
-    fi 
+    fi
   done
 }
 
 # ? mb make standalone theme ?
 
-# time function format 
+# time function format
 TIMEFMT=$'\n\nCPU\t%P\nuser\t%*U\nsys\t%*S\ntotal\t%*E'
 
 alias py=ipython3
@@ -186,7 +186,7 @@ function weather() {
 alias wt=weather
 alias wr=weather
 function color_table() {
-  for i in $(seq 0 ${1:-20}); do 
+  for i in $(seq 0 ${1:-20}); do
     echo "$(tput setab $i)Bcolor$i$(tput sgr0) $(tput setaf $i)Fcolor$i$(tput sgr0) $(tput setab $i)$(tput setaf 15)BFcolor$i$(tput sgr0) $(tput setab $i)$(tput setaf 8)BFcolor$i$(tput sgr0)"
   done
 }
