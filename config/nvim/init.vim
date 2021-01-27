@@ -33,6 +33,7 @@ map J <C-W>j
 map K <C-W>k
 map H <C-W>h
 map L <C-W>l
+map <C-n> :nohl<CR>
 
 set softtabstop=4
 set expandtab
@@ -69,6 +70,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'itchyny/lightline.vim'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
