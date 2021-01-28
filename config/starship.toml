@@ -1,15 +1,41 @@
+# 
+# 🚀 Starship config
+# Docs: https://starship.rs/config/#prompt
+#
 
 # format = """
-# [┌───────────────────>](bold green)
+# 
 # [│](bold green)$directory$rust$package
 # [└─>](bold green) """
 
-format = "$all"
-# Wait 10 milliseconds for starship to check files under the current directory.
-scan_timeout = 460
+format = """\
+${custom.visual_divider}\
+$jobs\
+$cmd_duration\
+$status\
+$python\
+$rust\
+$nodejs\
+$line_break\
+$time\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$line_break\
+$docker$character
+"""
+
+# directory scan timeout
+scan_timeout = 20
 
 # Disable the newline at the start of the prompt
-add_newline = false
+# add_newline = false
+
+[custom.visual_divider]
+command = "echo 🚀"
+when = "true"
 
 [directory]
 truncation_length = 0
@@ -18,44 +44,29 @@ truncation_symbol = "…/"
 style = "black dimmed"
 
 [git_branch]
-truncation_length = 4
-truncation_symbol = ""
+truncation_length = 8
+truncation_symbol = "…"
 format = "[$symbol$branch]($style) "
 style = "bold cyan"
 
 [cmd_duration]
-min_time = 1
-format = "**[$duration](bold yellow)"
+min_time = 0
+style = "bold"
+format = "[$duration]($style) "
 show_milliseconds = true
 
 [status]
 format = '[\[$status\]]($style) '
 disabled = false
-recognize_signal_code = false
-
-[character]
-success_symbol = "[➜](bold green)"  
-
-[package]
-disabled = true
+recognize_signal_code = true
 
 [python]
-symbol = "👾 "
-pyenv_version_name = true
-python_binary = ["python", "python3"]
-format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))]($style)'
+style = "bold purple"
+python_binary = ["python3", "python", "python2"]
+format = '[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style) '
 
-[aws]
-disabled = true
-format = 'on [$symbol$profile(\($region\))]($style) '
-style = "bold blue"
-symbol = "🅰 "
-[aws.region_aliases]
-ap-southeast-2 = "au"
-us-east-1 = "va"
-
-[docker_context]
-format = "via [🐋 $context](blue bold)"
-
-[gcloud]
-disabled = true
+[time]
+disabled = false
+format = '[\[$time\]]($style) '
+time_format = "%T"
+style = "normal"
