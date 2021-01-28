@@ -27,8 +27,11 @@ if [[ ! -d "$HOME/.config/antigen" ]]; then
 fi
 source "$HOME/.config/antigen/antigen.zsh"
 antigen use oh-my-zsh
+
+# sometimes buggy/laggy
 # antigen bundle marlonrichert/zsh-autocomplete
 antigen bundle zsh-users/zsh-autosuggestions
+
 antigen bundle django
 antigen bundle docker
 antigen bundle docker-compose
@@ -47,10 +50,10 @@ fi
 antigen apply
 
 # settings for marlonrichert/zsh-autocomplete
-zstyle ':autocomplete:tab:*' insert-unambiguous no     # if `yes` make Tab first insert any common substring, before inserting full completion
-zstyle ':autocomplete:tab:*' widget-style menu-complete # circular Tab and Shift-Tab for completion
+# zstyle ':autocomplete:tab:*' insert-unambiguous no     # if `yes` make Tab first insert any common substring, before inserting full completion
+# zstyle ':autocomplete:tab:*' widget-style menu-complete # circular Tab and Shift-Tab for completion
 zstyle ':autocomplete:*' min-delay .3
-zstyle ':autocomplete:*' key-binding off
+# zstyle ':autocomplete:*' key-binding off
 
 # Esc timeout for vi mode
 export KEYTIMEOUT=1
@@ -70,32 +73,34 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # ~/bin always overrides everything
 export PATH="$HOME/bin:$PATH"
 
-
 ##############################
 # prompt
 ##############################
-# full list of vars: http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-PROMPT=$'\
-%B%(?..%F{red})[$(printf "%03d" $?)]%b %F{white}%D{[%X]}%f %B%~%b $(git_super_status)%F{magenta}%B$(python_venv)%b%f\
-%B>>> %b'
+if [[ ! -z "$(which starship)" ]]; then
+  eval "$(starship init zsh)"
+else
+  # full list of vars: http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+  PROMPT=$'\
+  %B%(?..%F{red})[$(printf "%03d" $?)]%b %F{white}%D{[%X]}%f %B%~%b $(git_super_status)%F{magenta}%B$(python_venv)%b%f\
+  %B>>> %b'
 
-# never use right prompt
-RPROMPT=''
+  # never use right prompt
+  RPROMPT=''
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{cyan}%B"
-ZSH_THEME_GIT_PROMPT_SUFFIX=" "
-ZSH_THEME_GIT_PROMPT_BRANCH=" "
-ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
+  ZSH_THEME_GIT_PROMPT_PREFIX="%F{cyan}%B"
+  ZSH_THEME_GIT_PROMPT_SUFFIX=" "
+  ZSH_THEME_GIT_PROMPT_BRANCH=" "
+  ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
+fi
 
 # TODO: generalize mb?
 # export VIRTUAL_ENV_DISABLE_PROMPT=1
 function python_venv {
   if [[ ! -z "$VIRTUAL_ENV" ]]; then
-    echo "$VIRTUAL_ENV" | sed -E 's:.*/([^/]+/[^/]+)$:(\1):'
+    echo -ne "$VIRTUAL_ENV" | sed -E 's:.*/([^/]+/[^/]+)$:(\1):'
   fi
 }
 
-eval "$(starship init zsh)"
 ##############################
 # Vim
 ##############################
@@ -138,7 +143,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=marker:#cc62cc,spinner:#5c61f
 ##############################
 # random settings
 ##############################
-
+alias ':q'='exit'
 # Turns on colors with default unix `ls` command:
 export CLICOLOR=1
 
@@ -157,6 +162,9 @@ export BAT_THEME=OneHalfLight
 ZSH_HIGHLIGHT_MAXLENGTH=200
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_COMMAND_TIME_MIN_SECONDS=1
+
+# time function format
+TIMEFMT=$'\n\nCPU\t%P\nuser\t%*U\nsys\t%*S\ntotal\t%*E'
 
 # smart cd
 function cd {
@@ -184,11 +192,8 @@ function venv {
     fi
   done
 }
-
-# ? mb make standalone theme ?
-
-# time function format
-TIMEFMT=$'\n\nCPU\t%P\nuser\t%*U\nsys\t%*S\ntotal\t%*E'
+alias createvenv='python3 -m venv --prompt "$pwd:h:t" .venv'
+alias cvenv='createvenv'
 
 alias py=ipython3
 alias ipy=ipython3
