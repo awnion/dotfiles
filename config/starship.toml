@@ -4,8 +4,9 @@
 # [│](bold green)$directory$rust$package
 # [└─>](bold green) """
 
+format = "$all"
 # Wait 10 milliseconds for starship to check files under the current directory.
-scan_timeout = 10
+scan_timeout = 460
 
 # Disable the newline at the start of the prompt
 add_newline = false
@@ -41,7 +42,8 @@ disabled = true
 [python]
 symbol = "👾 "
 pyenv_version_name = true
-python_binary = "python3"
+python_binary = ["python", "python3"]
+format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))]($style)'
 
 [aws]
 disabled = true
