@@ -27,7 +27,8 @@ if [[ ! -d "$HOME/.config/antigen" ]]; then
 fi
 source "$HOME/.config/antigen/antigen.zsh"
 antigen use oh-my-zsh
-antigen bundle marlonrichert/zsh-autocomplete
+# antigen bundle marlonrichert/zsh-autocomplete
+antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle django
 antigen bundle docker
 antigen bundle docker-compose
@@ -75,7 +76,7 @@ export PATH="$HOME/bin:$PATH"
 ##############################
 # full list of vars: http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 PROMPT=$'\
-%B%(?..%F{red})[$(printf "%03d" $?)]%b %F{white}%D{[%X]}%f %B%~%b $(git_super_status) %F{magenta}%B$(python_venv)%b%f\
+%B%(?..%F{red})[$(printf "%03d" $?)]%b %F{white}%D{[%X]}%f %B%~%b $(git_super_status)%F{magenta}%B$(python_venv)%b%f\
 %B>>> %b'
 
 # never use right prompt
@@ -90,9 +91,11 @@ ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 function python_venv {
   if [[ ! -z "$VIRTUAL_ENV" ]]; then
-    echo "$VIRTUAL_ENV" | sed -E 's:.*/([^/]+/[^/]+)$:(\1) :'
+    echo "$VIRTUAL_ENV" | sed -E 's:.*/([^/]+/[^/]+)$:(\1):'
   fi
 }
+
+eval "$(starship init zsh)"
 ##############################
 # Vim
 ##############################
@@ -113,6 +116,8 @@ export EDITOR="$VISUAL"
 #   -x#  tabs are # instead of 8
 #   -j#  skip first # lines from the top of the screen then search
 export LESS="-ij5RFXMx4 --mouse --wheel-lines=2"
+# change hist file location
+export LESSHISTFILE=$HOME/.cache/lesshst
 export PAGER='colorless'
 export MANPAGER='colorless'
 alias less='colorless'
@@ -123,6 +128,7 @@ alias less='colorless'
 ##############################
 export FZF_DEFAULT_COMMAND='fd'
 # generator here https://minsw.github.io/fzf-color-picker/
+# !! replaces terminal background !!
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=fg:#555555,bg:#fafafa,hl:#ff4747"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=fg+:#2e2e2e,bg+:#eaeaea,hl+:#ff0000"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=info:#ac84ad,prompt:#ff0000,pointer:#008cff"
@@ -153,10 +159,18 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_COMMAND_TIME_MIN_SECONDS=1
 
 # smart cd
-cd() {
+function cd {
   builtin cd $@ && \
   COLUMNS=$(tput cols) ls --color=always -FCA | tail -5
 }
+function f {
+  base_dir="$(realpath ${1:-.})"
+  new_dir="$(fd -t d --base-directory ${base_dir} | fzf)"
+  if [[ ! -z "$new_dir" ]]; then
+    cd $base_dir/$new_dir
+  fi
+}
+alias fh='f ~'
 
 # python venv trick
 function venv {

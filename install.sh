@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # TODO: Maybe rewrite this on python??
 #       check this: https://github.com/anishathalye/dotbot/blob/master/bin/dotbot
@@ -13,6 +13,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false # For VS Code Insider
   defaults write com.visualstudio.code.oss ApplePressAndHoldEnabled -bool false    # For VS Codium
   # defaults delete -g ApplePressAndHoldEnabled                                      # If necessary, reset global default
+
+  # make repeat speed lighting fast
+  defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
+  defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 fi
 
 (
@@ -38,12 +42,14 @@ mkdir -p "$HOME/.config"
   rm -rf lesscolors.sh
   rm -rf nvim
   rm -rf wezterm
+  rm -rf starship.toml
   ln -s $DOTFILES_DIR/config/alacritty alacritty
   ln -s $DOTFILES_DIR/config/htop htop
   ln -s $DOTFILES_DIR/config/gitignore_global gitignore_global
   ln -s $DOTFILES_DIR/config/lesscolors.sh lesscolors.sh
   ln -s $DOTFILES_DIR/config/nvim nvim
   ln -s $DOTFILES_DIR/config/wezterm wezterm
+  ln -s $DOTFILES_DIR/config/starship.toml starship.toml
 )
 
 mkdir -p "$HOME/bin"
