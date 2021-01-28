@@ -33,13 +33,13 @@ antigen bundle django
 antigen bundle docker
 antigen bundle docker-compose
 antigen bundle git
-antigen bundle git-prompt
+# antigen bundle git-prompt
 antigen bundle pip
 antigen bundle tmux
 # doesn't work properly with zsh-autocomplete (yet)
 # antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle popstas/zsh-command-time
+# antigen bundle popstas/zsh-command-time
 if [[ "$OSTYPE" == "darwin"* ]]; then
   antigen bundle osx
 fi
@@ -88,7 +88,7 @@ ZSH_THEME_GIT_PROMPT_BRANCH=" "
 ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
 
 # TODO: generalize mb?
-export VIRTUAL_ENV_DISABLE_PROMPT=1
+# export VIRTUAL_ENV_DISABLE_PROMPT=1
 function python_venv {
   if [[ ! -z "$VIRTUAL_ENV" ]]; then
     echo "$VIRTUAL_ENV" | sed -E 's:.*/([^/]+/[^/]+)$:(\1):'
