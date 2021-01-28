@@ -1,12 +1,15 @@
 echo "Loading ~/.zshrc"
+if [[ -z "$__ZPROFILE" ]]; then
+  source $HOME/.zprofile
+fi
 
 
 ##############################
 # history
 ##############################
-HISTFILE="$HOME/.cache/zsh/zhistory"
-HISTSIZE=10000000
-SAVEHIST=10000000
+export HISTFILE="$HOME/.cache/zsh/zhistory"
+export HISTSIZE=10000000
+export SAVEHIST=10000000
 setopt SHARE_HISTORY          # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries first when trimming history.
 setopt HIST_IGNORE_DUPS       # Don't record an entry that was just recorded again.
@@ -39,6 +42,9 @@ antigen bundle git
 # antigen bundle git-prompt
 antigen bundle pip
 antigen bundle tmux
+antigen bundle fd
+antigen bundle fzf
+
 # doesn't work properly with zsh-autocomplete (yet)
 # antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -159,13 +165,14 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 alias ls='ls --color=always -FCA'
 alias rm='rm -i'
 export BAT_THEME=OneHalfLight
-ZSH_HIGHLIGHT_MAXLENGTH=200
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
-ZSH_COMMAND_TIME_MIN_SECONDS=1
+export ZSH_HIGHLIGHT_MAXLENGTH=200
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+export ZSH_COMMAND_TIME_MIN_SECONDS=1
 
 # time function format
-TIMEFMT=$'\n\nCPU\t%P\nuser\t%*U\nsys\t%*S\ntotal\t%*E'
-
+export TIMEFMT="\n\nCPU\t%P\nuser\\t%*U\\nsys\\t%*S\\ntotal\\t%*E"
+# %Uuser %Ssystem %Eelapsed %PCPU (%Xtext+%Ddata %Mmax)k
+#          %Iinputs+%Ooutputs (%Fmajor+%Rminor)pagefaults %Wswaps
 # smart cd
 function cd {
   builtin cd $@ && \
