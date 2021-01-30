@@ -79,6 +79,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # ~/bin always overrides everything
 export PATH="$HOME/bin:$PATH"
 
+
 ##############################
 # prompt
 ##############################
@@ -107,6 +108,7 @@ function python_venv {
   fi
 }
 
+
 ##############################
 # Vim
 ##############################
@@ -114,6 +116,7 @@ alias vi=nvim
 alias vim=nvim
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+
 
 ##############################
 # Pagers
@@ -138,12 +141,24 @@ alias less='colorless'
 # FZF settings
 ##############################
 export FZF_DEFAULT_COMMAND='fd'
+export FZF_CTRL_T_COMMAND='fd -t d . $HOME'
+# export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 # generator here https://minsw.github.io/fzf-color-picker/
 # !! replaces terminal background !!
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=fg:#555555,bg:#fafafa,hl:#ff4747"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=fg+:#2e2e2e,bg+:#eaeaea,hl+:#ff0000"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=info:#ac84ad,prompt:#ff0000,pointer:#008cff"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=marker:#cc62cc,spinner:#5c61ff,header:#5d9191"
+
+function f {
+  new_dir="\
+    $(fd -H -I -E .git -t d \
+    | fzf --preview='ls --color=always -gGhFA --group-directories-first {}')"
+  if [[ ! -z "$new_dir" ]]; then
+    cd $base_dir/$new_dir
+  fi
+}
+# alias fh='f ~'
 
 
 ##############################
@@ -178,16 +193,10 @@ function cd {
   builtin cd $@ && \
   COLUMNS=$(tput cols) ls --color=always -FCA | tail -5
 }
-function f {
-  base_dir="$(realpath ${1:-.})"
-  new_dir="$(fd -t d --base-directory ${base_dir} | fzf)"
-  if [[ ! -z "$new_dir" ]]; then
-    cd $base_dir/$new_dir
-  fi
-}
-alias fh='f ~'
 
+# python
 # python venv trick
+export IPYTHONDIR=$HOME/.config/ipython
 function venv {
   local -a venv_cases
   venv_cases+=( ".venv/bin/activate" )
@@ -202,6 +211,7 @@ function venv {
 alias createvenv='python3 -m venv --prompt "$pwd:h:t" .venv'
 alias cvenv='createvenv'
 
+alias p=ipython3
 alias py=ipython3
 alias ipy=ipython3
 function weather() {
