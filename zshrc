@@ -195,8 +195,9 @@ function cd {
 }
 
 # python
-# python venv trick
 export IPYTHONDIR=$HOME/.config/ipython
+
+# python venv trick
 function venv {
   local -a venv_cases
   venv_cases+=( ".venv/bin/activate" )
