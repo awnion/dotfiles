@@ -55,6 +55,8 @@ fi
 
 antigen apply
 
+autoload -U compinit && compinit
+
 # settings for marlonrichert/zsh-autocomplete
 # zstyle ':autocomplete:tab:*' insert-unambiguous no     # if `yes` make Tab first insert any common substring, before inserting full completion
 # zstyle ':autocomplete:tab:*' widget-style menu-complete # circular Tab and Shift-Tab for completion
@@ -196,6 +198,8 @@ function cd {
 
 # python
 export IPYTHONDIR=$HOME/.config/ipython
+# pipx
+eval "$(register-python-argcomplete pipx)"
 
 # python venv trick
 function venv {
