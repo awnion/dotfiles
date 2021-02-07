@@ -44,7 +44,7 @@ font:
 colors:
   primary:
     background: "#fbfbfb"
-    foreground: "#666666"
+    foreground: "#444444"
   cursor:
     text:       "#212121"
     cursor:     "#76FF03"
