@@ -185,9 +185,8 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 export ZSH_COMMAND_TIME_MIN_SECONDS=1
 
 # time function format
-export TIMEFMT="\n\nCPU\t%P\nuser\\t%*U\\nsys\\t%*S\\ntotal\\t%*E"
-# %Uuser %Ssystem %Eelapsed %PCPU (%Xtext+%Ddata %Mmax)k
-#          %Iinputs+%Ooutputs (%Fmajor+%Rminor)pagefaults %Wswaps
+# bash style time
+export TIMEFMT=$'\n\nCPU\t%P\nuser\t%*U\nsys\t%*S\ntotal\t%*E'
 # smart cd
 function cd {
   builtin cd $@ && \
