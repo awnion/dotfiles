@@ -41,7 +41,7 @@ when = "true"
 truncation_length = 0
 truncate_to_repo = false
 truncation_symbol = "…/"
-style = "black dimmed"
+style = ""
 
 [git_branch]
 truncation_length = 8
