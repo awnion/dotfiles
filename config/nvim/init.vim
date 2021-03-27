@@ -25,14 +25,14 @@ nnoremap \ :grep<SPACE>
 
 set clipboard+=unnamedplus
 
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-map J <C-W>j
-map K <C-W>k
-map H <C-W>h
-map L <C-W>l
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
+map <Down>   <C-W>j
+map <Up>     <C-W>k
+map <Left>   <C-W>h
+map <Right>  <C-W>l
 map <C-n> :nohl<CR>
 
 set softtabstop=4
@@ -71,6 +71,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'itchyny/lightline.vim'
+Plug 'airblade/vim-gitgutter'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
