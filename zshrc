@@ -76,6 +76,7 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.cabal/bin/:$PATH"
 # ~/bin always overrides everything
 export PATH="$HOME/bin:$PATH"
 
