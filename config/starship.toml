@@ -44,7 +44,7 @@ truncation_symbol = "…/"
 style = ""
 
 [git_branch]
-truncation_length = 8
+truncation_length = 30
 truncation_symbol = "…"
 format = "[$symbol$branch]($style) "
 style = "bold cyan"
