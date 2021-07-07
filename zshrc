@@ -74,6 +74,7 @@ export PATH="/usr/local/sbin:$PATH"
 # break `ls` compatibility
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
 export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.cabal/bin/:$PATH"
