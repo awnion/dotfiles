@@ -228,3 +228,10 @@ function color_table() {
     echo "$(tput setab $i)Bcolor$i$(tput sgr0) $(tput setaf $i)Fcolor$i$(tput sgr0) $(tput setab $i)$(tput setaf 15)BFcolor$i$(tput sgr0) $(tput setab $i)$(tput setaf 8)BFcolor$i$(tput sgr0)"
   done
 }
+
+function git-clean-gone {
+  git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}')
+  do 
+    git branch -D $branch
+  done
+}
