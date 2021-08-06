@@ -77,7 +77,7 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
 export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.cabal/bin/:$PATH"
+export PATH="$HOME/.cabal/bin:$PATH"
 # ~/bin always overrides everything
 export PATH="$HOME/bin:$PATH"
 
@@ -85,7 +85,7 @@ export PATH="$HOME/bin:$PATH"
 ##############################
 # prompt
 ##############################
-if [[ ! -z "$(which starship)" ]]; then
+if [[ -x "$(which starship)" ]]; then
   eval "$(starship init zsh)"
 else
   # full list of vars: http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
