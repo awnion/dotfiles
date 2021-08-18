@@ -41,9 +41,11 @@ antigen bundle docker-compose
 antigen bundle git
 # antigen bundle git-prompt
 antigen bundle pip
+antigen bundle thuandt/zsh-pipx
 antigen bundle tmux
 antigen bundle fd
 antigen bundle fzf
+antigen bundle ansible
 
 # doesn't work properly with zsh-autocomplete (yet)
 # antigen bundle zdharma/fast-syntax-highlighting
@@ -63,23 +65,6 @@ zstyle ':autocomplete:*' min-delay .3
 
 # Esc timeout for vi mode
 export KEYTIMEOUT=1
-
-
-##############################
-# paths
-##############################
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-# use GNU coreutils by their default names (e.g. dircolors)
-# break `ls` compatibility
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
-export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.cabal/bin:$PATH"
-# ~/bin always overrides everything
-export PATH="$HOME/bin:$PATH"
 
 
 ##############################
@@ -231,7 +216,7 @@ function color_table() {
 
 function git-clean-gone {
   git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}')
-  do 
+  do
     git branch -D $branch
   done
 }
