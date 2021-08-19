@@ -20,22 +20,22 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 (
-  cd $HOME
+  cd "$HOME" || exit
   rm -rf .gitconfig
   rm -rf .tmux.conf
   rm -rf .vimrc
   rm -rf .zprofile
   rm -rf .zshrc
-  ln -s $DOTFILES_DIR/gitconfig .gitconfig
-  ln -s $DOTFILES_DIR/tmux.conf .tmux.conf
-  ln -s $DOTFILES_DIR/vimrc .vimrc
-  ln -s $DOTFILES_DIR/zprofile .zprofile
-  ln -s $DOTFILES_DIR/zshrc .zshrc
+  ln -s "$DOTFILES_DIR/gitconfig" .gitconfig
+  ln -s "$DOTFILES_DIR/tmux.conf" .tmux.conf
+  ln -s "$DOTFILES_DIR/vimrc" .vimrc
+  ln -s "$DOTFILES_DIR/zprofile" .zprofile
+  ln -s "$DOTFILES_DIR/zshrc" .zshrc
 )
 
 mkdir -p "$HOME/.config"
 (
-  cd $HOME/.config
+  cd "$HOME/.config" || exit
   rm -rf alacritty
   rm -rf htop
   rm -rf gitignore_global
@@ -43,19 +43,19 @@ mkdir -p "$HOME/.config"
   rm -rf nvim
   rm -rf wezterm
   rm -rf starship.toml
-  ln -s $DOTFILES_DIR/config/alacritty alacritty
-  ln -s $DOTFILES_DIR/config/htop htop
-  ln -s $DOTFILES_DIR/config/gitignore_global gitignore_global
-  ln -s $DOTFILES_DIR/config/lesscolors.sh lesscolors.sh
-  ln -s $DOTFILES_DIR/config/nvim nvim
-  ln -s $DOTFILES_DIR/config/wezterm wezterm
-  ln -s $DOTFILES_DIR/config/starship.toml starship.toml
+  ln -s "$DOTFILES_DIR/config/alacritty" alacritty
+  ln -s "$DOTFILES_DIR/config/htop" htop
+  ln -s "$DOTFILES_DIR/config/gitignore_global" gitignore_global
+  ln -s "$DOTFILES_DIR/config/lesscolors.sh" lesscolors.sh
+  ln -s "$DOTFILES_DIR/config/nvim" nvim
+  ln -s "$DOTFILES_DIR/config/wezterm" wezterm
+  ln -s "$DOTFILES_DIR/config/starship.toml" starship.toml
 )
 
 mkdir -p "$HOME/bin"
 (
-  cd $HOME/bin
+  cd "$HOME/bin" || exit
   rm -rf colorless
-  ln -s $DOTFILES_DIR/bin/colorless colorless
+  ln -s "$DOTFILES_DIR/bin/colorless" colorless
   chmod +x colorless
 )
