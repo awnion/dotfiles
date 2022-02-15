@@ -47,3 +47,6 @@ rebase = true
 
 [log]
 date = relative
+
+[init]
+defaultBranch = main
