@@ -27,11 +27,10 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.cabal/bin:$PATH"
 
 # pipx support
-export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+# export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # tondev
-# export PATH="/usr/local/opt/node@14/bin:$PATH"
 export PATH="$HOME/.tondev/bin:$PATH"
 export PATH="$HOME/pro/ton/tonos-cli/target/release:$PATH"
 

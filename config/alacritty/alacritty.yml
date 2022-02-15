@@ -47,7 +47,7 @@ colors:
     foreground: "#444444"
   cursor:
     text:       "#212121"
-    cursor:     "#76FF03"
+    cursor:     "#ff8c00"
   normal:
     black:      "#121212"
     red:        "#e60013"
