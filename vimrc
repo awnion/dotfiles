@@ -1,3 +1,4 @@
+""" Minimal config for SSH use mostly
 set noswapfile
 set nu
 set mouse=a
