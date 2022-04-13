@@ -23,9 +23,6 @@ export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"
 # rust
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# haskell
-export PATH="$HOME/.cabal/bin:$PATH"
-
 # pipx support
 # export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
