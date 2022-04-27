@@ -50,14 +50,14 @@ format = "[$symbol$branch]($style) "
 style = "bold cyan"
 
 [cmd_duration]
-min_time = 0
+min_time = 999099999999
 style = "bold"
 format = "[$duration]($style) "
 show_milliseconds = true
 
 [status]
 format = '[\[$status\]]($style) '
-disabled = false
+disabled = true
 recognize_signal_code = true
 
 [python]
@@ -66,7 +66,7 @@ python_binary = ["python3", "python", "python2"]
 format = '[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style) '
 
 [time]
-disabled = false
+disabled = true
 format = '[\[$time\]]($style) '
 time_format = "%T"
 style = "normal"

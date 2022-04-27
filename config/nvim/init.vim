@@ -10,7 +10,7 @@ sy on
 colorscheme one
 set background=light
 
-set showtabline=2
+set showtabline=0
 set numberwidth=5
 set colorcolumn=80,120
 " setlocal path=.,**
@@ -34,6 +34,11 @@ map <Up>     <C-W>k
 map <Left>   <C-W>h
 map <Right>  <C-W>l
 map <C-n> :nohl<CR>
+
+nnoremap n nzt
+nnoremap N Nzt
+xnoremap n nzt
+xnoremap N Nzt
 
 set softtabstop=4
 set expandtab
@@ -87,7 +92,7 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-set cmdheight=2
+set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
