@@ -8,28 +8,27 @@ fi
 ##############################
 # paths
 ##############################
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
+PATH=/usr/local/sbin:"$PATH"
+PATH=/usr/local/bin:"$PATH"
 
 # use GNU coreutils by their default names (e.g. dircolors)
 # break `ls` compatibility
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+PATH=/usr/local/opt/coreutils/libexec/gnubin:"$PATH"
 
 # ruby
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
-export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"
+PATH=/usr/local/opt/ruby/bin:"$PATH"
 
 # rust
-export PATH="$HOME/.cargo/bin:$PATH"
+PATH="$HOME"/.cargo/bin:"$PATH"
 
 # pipx support
-# export PATH="$HOME/Library/Python/3.9/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+PATH="$HOME"/.local/bin:"$PATH"
 
 # tondev
-export PATH="$HOME/.tondev/bin:$PATH"
-export PATH="$HOME/pro/ton/tonos-cli/target/release:$PATH"
+PATH="$HOME"/.tondev/bin:"$PATH"
+PATH="$HOME"/pro/ton/tonos-cli/target/release:"$PATH"
 
 # ~/bin always overrides everything
-export PATH="$HOME/bin:$PATH"
+PATH="$HOME"/bin:"$PATH"
+
+export PATH
