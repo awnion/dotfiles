@@ -1,13 +1,13 @@
 echo "Loading ~/.zshrc"
 if [[ -z "$__ZPROFILE" ]]; then
-  source $HOME/.zprofile
+  source "$HOME"/.zprofile
 fi
 
 
 ##############################
 # history
 ##############################
-export HISTFILE="$HOME/.cache/zsh/zhistory"
+export HISTFILE="$HOME"/.cache/zsh/zhistory
 export HISTSIZE=10000000
 export SAVEHIST=10000000
 setopt SHARE_HISTORY          # Share history between all sessions.
@@ -26,9 +26,9 @@ setopt HIST_BEEP              # Beep when accessing nonexistent history.
 # antigen
 ##############################
 if [[ ! -d "$HOME/.config/antigen" ]]; then
-  git clone https://github.com/zsh-users/antigen.git "$HOME/.config/antigen"
+  git clone https://github.com/zsh-users/antigen.git "$HOME"/.config/antigen
 fi
-source "$HOME/.config/antigen/antigen.zsh"
+source "$HOME"/.config/antigen/antigen.zsh
 antigen use oh-my-zsh
 
 # sometimes buggy/laggy
@@ -118,7 +118,7 @@ export EDITOR="$VISUAL"
 #   -j#  skip first # lines from the top of the screen then search
 export LESS="-ij5RFXMx4 --mouse --wheel-lines=2"
 # change hist file location
-export LESSHISTFILE=$HOME/.cache/lesshst
+export LESSHISTFILE="$HOME"/.cache/lesshst
 export PAGER='colorless'
 export MANPAGER='colorless'
 alias less='colorless'
