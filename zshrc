@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Loading ~/.zshrc"
 if [[ -z "$__ZPROFILE" ]]; then
   source "$HOME"/.zprofile
@@ -89,7 +90,7 @@ fi
 
 # TODO: generalize mb?
 # export VIRTUAL_ENV_DISABLE_PROMPT=1
-function python_venv {
+python_venv () {
   if [[ ! -z "$VIRTUAL_ENV" ]]; then
     echo -ne "$VIRTUAL_ENV" | sed -E 's:.*/([^/]+/[^/]+)$:(\1):'
   fi
@@ -137,7 +138,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=fg+:#2e2e2e,bg+:#eaeaea,hl+:#
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=info:#ac84ad,prompt:#ff0000,pointer:#008cff"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=marker:#cc62cc,spinner:#5c61ff,header:#5d9191"
 
-function f {
+f () {
   new_dir="\
     $(fd -H -I -E .git -t d \
     | fzf --preview='ls --color=always -gGhFA --group-directories-first {}')"
@@ -175,7 +176,7 @@ export ZSH_COMMAND_TIME_MIN_SECONDS=1
 # bash style time
 export TIMEFMT=$'\n\nCPU\t%P\nuser\t%*U\nsys\t%*S\ntotal\t%*E'
 # smart cd
-function cd {
+cd () {
   builtin cd $@ && \
   COLUMNS=$(tput cols) ls --color=always -FCA | tail -5
 }
@@ -184,7 +185,7 @@ function cd {
 export IPYTHONDIR=$HOME/.config/ipython
 
 # python venv trick
-function venv {
+venv () {
   local -a venv_cases
   venv_cases+=( ".venv/bin/activate" )
   venv_cases+=( "venv/bin/activate" )
@@ -195,6 +196,7 @@ function venv {
     fi
   done
 }
+# TODO: need check if we are in ZSH unles won't work
 alias createvenv='python3 -m venv --prompt "$pwd:h:t" .venv'
 alias cvenv='createvenv'
 
