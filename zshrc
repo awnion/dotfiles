@@ -201,21 +201,22 @@ alias cvenv='createvenv'
 alias p=ipython3
 alias py=ipython3
 alias ipy=ipython3
-function weather() {
+weather () {
   clear
   echo "Weather $1 $2"
   curl "http://wttr.in/${1:-}?${2:-TF0nq}"
 }
 alias wt=weather
 alias wr=weather
-function color_table() {
+color_table () {
   for i in $(seq 0 ${1:-20}); do
     echo "$(tput setab $i)Bcolor$i$(tput sgr0) $(tput setaf $i)Fcolor$i$(tput sgr0) $(tput setab $i)$(tput setaf 15)BFcolor$i$(tput sgr0) $(tput setab $i)$(tput setaf 8)BFcolor$i$(tput sgr0)"
   done
 }
 
-function git-clean-gone {
-  git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}')
+git-clean-gone () {
+  git fetch -p
+  for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}')
   do
     git branch -D $branch
   done
