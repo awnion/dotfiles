@@ -32,3 +32,6 @@ PATH="$HOME"/pro/ton/tonos-cli/target/release:"$PATH"
 PATH="$HOME"/bin:"$PATH"
 
 export PATH
+
+# nvm support
+export NVM_DIR="$HOME"/.nvm
