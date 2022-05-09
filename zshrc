@@ -47,6 +47,11 @@ antigen bundle tmux
 antigen bundle fd
 antigen bundle fzf
 antigen bundle ansible
+antigen bundle nvm
+antigen bundle npm
+antigen bundle cargo
+antigen bundle golang
+
 
 # doesn't work properly with zsh-autocomplete (yet)
 # antigen bundle zdharma/fast-syntax-highlighting
@@ -223,10 +228,3 @@ git-clean-gone () {
     git branch -D $branch
   done
 }
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-# This loads nvm
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
-# This loads nvm bash_completion
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
