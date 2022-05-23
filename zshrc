@@ -49,7 +49,7 @@ antigen bundle fzf
 antigen bundle ansible
 antigen bundle nvm
 antigen bundle npm
-antigen bundle cargo
+antigen bundle rust
 antigen bundle golang
 
 
