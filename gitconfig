@@ -1,9 +1,14 @@
 [user]
 email = blinovsv@gmail.com
 name = Sergei Blinov
-signingkey = B09F4BA16BCD19B6
+
+[include]
+path=~/.gitsignkey
 
 [commit]
+gpgsign = true
+
+[tag]
 gpgsign = true
 
 [color]
