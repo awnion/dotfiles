@@ -52,10 +52,8 @@ antigen bundle fzf
 antigen bundle ansible
 antigen bundle nvm
 antigen bundle npm
-antigen bundle rust
 antigen bundle golang
 
-antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 
@@ -63,6 +61,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   antigen bundle osx
 fi
 
+antigen apply
+
+# TODO: wtf?
+antigen bundle rust
 antigen apply
 
 # settings for marlonrichert/zsh-autocomplete
