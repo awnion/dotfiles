@@ -1,9 +1,12 @@
 #!/bin/bash
+# ^^^^^^^^^ fake shebang for editors
+
 echo "Loading ~/.zshrc"
 if [[ -z "$__ZPROFILE" ]]; then
   source "$HOME"/.zprofile
 fi
 
+export LANGUAGE=en_US.UTF-8
 
 ##############################
 # history
@@ -26,7 +29,7 @@ setopt HIST_BEEP              # Beep when accessing nonexistent history.
 ##############################
 # antigen
 ##############################
-if [[ ! -d "$HOME/.config/antigen" ]]; then
+if [[ ! -d "$HOME"/.config/antigen ]]; then
   git clone https://github.com/zsh-users/antigen.git "$HOME"/.config/antigen
 fi
 source "$HOME"/.config/antigen/antigen.zsh
@@ -52,11 +55,10 @@ antigen bundle npm
 antigen bundle rust
 antigen bundle golang
 
-
-# doesn't work properly with zsh-autocomplete (yet)
-# antigen bundle zdharma/fast-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
-# antigen bundle popstas/zsh-command-time
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
   antigen bundle osx
 fi
@@ -187,7 +189,7 @@ cd () {
 }
 
 # python
-export IPYTHONDIR=$HOME/.config/ipython
+export IPYTHONDIR="$HOME"/.config/ipython
 
 # python venv trick
 venv () {
