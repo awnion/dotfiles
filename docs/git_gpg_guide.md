@@ -48,7 +48,7 @@ gpg --armor --export $SIGN_KEY # add to github
 
 # Misc
 
-Add to `.gitconfig`: 
+Add to `.gitconfig`:
 
 ```toml
 [include]
