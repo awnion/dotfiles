@@ -11,7 +11,9 @@ export LANGUAGE=en_US.UTF-8
 ##############################
 # history
 ##############################
-export HISTFILE="$HOME"/.cache/zsh/zhistory
+HISTFILE_DIR="$HOME"/.cache/zsh
+mkdir -p "$HISTFILE_DIR"
+export HISTFILE="$HISTFILE_DIR"/zhistory
 export HISTSIZE=10000000
 export SAVEHIST=10000000
 setopt SHARE_HISTORY          # Share history between all sessions.
