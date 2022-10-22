@@ -16,7 +16,11 @@ PATH=/usr/local/bin:"$PATH"
 PATH=/usr/local/opt/coreutils/libexec/gnubin:"$PATH"
 
 # ruby
-PATH=/usr/local/opt/ruby/bin:"$PATH"
+if [[ -d /home/linuxbrew ]]; then
+    PATH=/home/linuxbrew/.linuxbrew/opt/ruby@3.0/bin:"$PATH"
+else
+    PATH=/usr/local/opt/ruby/bin:"$PATH"
+fi
 
 # rust
 PATH="$HOME"/.cargo/bin:"$PATH"
