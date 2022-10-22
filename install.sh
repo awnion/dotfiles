@@ -50,6 +50,7 @@ mkdir -p "$HOME/.config"
   ln -s "$DOTFILES_DIR/config/nvim" nvim
   ln -s "$DOTFILES_DIR/config/wezterm" wezterm
   ln -s "$DOTFILES_DIR/config/starship.toml" starship.toml
+  ln -s "$DOTFILES_DIR/config/zoomus.conf" zoomus.conf
 )
 
 mkdir -p "$HOME/bin"
