@@ -25,6 +25,7 @@ nnoremap \ :grep<SPACE>
 
 set clipboard+=unnamedplus
 
+let g:mapleader=" "
 " map <C-j> <C-W>j
 " map <C-k> <C-W>k
 " map <C-h> <C-W>h
@@ -34,6 +35,8 @@ map <Up>     <C-W>k
 map <Left>   <C-W>h
 map <Right>  <C-W>l
 map <C-n> :nohl<CR>
+map <Leader>w :w<CR>
+map  :Commentary<CR>
 
 set softtabstop=4
 set expandtab
@@ -240,3 +243,4 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
