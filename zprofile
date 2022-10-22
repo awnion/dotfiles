@@ -17,7 +17,7 @@ PATH=/usr/local/opt/coreutils/libexec/gnubin:"$PATH"
 
 # ruby
 if [[ -d /home/linuxbrew ]]; then
-    PATH=/home/linuxbrew/.linuxbrew/opt/ruby@3.0/bin:"$PATH"
+    PATH=/home/linuxbrew/.linuxbrew/opt/ruby/bin:"$PATH"
 else
     PATH=/usr/local/opt/ruby/bin:"$PATH"
 fi
