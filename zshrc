@@ -144,7 +144,7 @@ export FZF_CTRL_T_COMMAND='fd -t d . $HOME'
 # export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 # generator here https://minsw.github.io/fzf-color-picker/
 # !! replaces terminal background !!
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=fg:#555555,bg:#fafafa,hl:#ff4747"
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=fg:-1,bg:-1,hl:#ff4747"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=fg+:#2e2e2e,bg+:#eaeaea,hl+:#ff0000"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=info:#ac84ad,prompt:#ff0000,pointer:#008cff"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=marker:#cc62cc,spinner:#5c61ff,header:#5d9191"
