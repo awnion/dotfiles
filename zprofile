@@ -35,9 +35,11 @@ PATH="$HOME"/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/:"$PATH"
 # pipx support
 PATH="$HOME"/.local/bin:"$PATH"
 
-# tondev
-PATH="$HOME"/.tondev/bin:"$PATH"
-PATH="$HOME"/pro/ton/tonos-cli/target/release:"$PATH"
+# # tondev
+# PATH="$HOME"/.tondev/bin:"$PATH"
+# PATH="$HOME"/pro/ton/tonos-cli/target/release:"$PATH"
+
+PATH="$HOME"/.gosh:"$PATH"
 
 # ~/bin always overrides everything
 PATH="$HOME"/bin:"$PATH"
