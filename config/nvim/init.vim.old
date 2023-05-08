@@ -8,7 +8,7 @@ sy on
 " colorscheme NeoSolarized
 
 colorscheme one
-set background=light
+" set background=light
 
 set showtabline=2
 set numberwidth=5
