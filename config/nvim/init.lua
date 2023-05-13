@@ -1,3 +1,4 @@
+require('plugins')
 require('keymaps')
 
 HOME = os.getenv("HOME")
