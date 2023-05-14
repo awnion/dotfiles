@@ -23,6 +23,37 @@ require("lazy").setup({
   },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { "tpope/vim-surround" },
+
+  { 'itchyny/lightline.vim' },
+  { 'airblade/vim-gitgutter' },
+
+  -- LSP
   { "neovim/nvim-lspconfig" },
   { 'simrat39/rust-tools.nvim' },
+
+  -- Autocompletion
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+  },
+  { 'hrsh7th/cmp-nvim-lsp' },
+  { 'hrsh7th/cmp-buffer' },
+  { 'hrsh7th/cmp-path' },
+  { 'hrsh7th/cmp-cmdline' },
+  { 'hrsh7th/nvim-cmp' },
+
+  -- Useful plugin to show you pending keybinds.
+  { 'folke/which-key.nvim', opts = {} },
+
+  -- Theme inspired by Atom
+  {
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'onedark'
+    end,
+  },
+
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim', opts = {} },
 })

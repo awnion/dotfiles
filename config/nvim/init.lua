@@ -1,6 +1,3 @@
-require('plugins')
-require('keymaps')
-
 HOME = os.getenv("HOME")
 
 vim.opt.swapfile = true
@@ -10,7 +7,6 @@ vim.opt.termguicolors = true
 
 vim.opt.syntax = "on"
 vim.opt.background = "dark"
-vim.cmd("colorscheme one")
 
 vim.opt.showtabline = 2
 vim.opt.numberwidth = 5
@@ -28,3 +24,7 @@ vim.opt.tabstop = 4
 vim.opt.errorbells = false
 vim.opt.visualbell = false
 
+require('plugins')
+require('keymaps')
+
+vim.cmd("colorscheme onedark")

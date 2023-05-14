@@ -1,11 +1,33 @@
 -- Setup language servers.
 local lspconfig = require('lspconfig')
+
 lspconfig.pyright.setup {}
 lspconfig.tsserver.setup {}
+
+local on_attach = function(client)
+    require'completion'.on_attach(client)
+end
+
 lspconfig.rust_analyzer.setup {
+  on_attach=on_attach,
   -- Server-specific settings. See `:help lspconfig-setup`
   settings = {
-    ['rust-analyzer'] = {},
+    ["rust-analyzer"] = {
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
+      procMacro = {
+        enable = true
+      },
+    },
   },
 }
 

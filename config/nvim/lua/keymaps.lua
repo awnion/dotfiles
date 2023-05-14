@@ -7,10 +7,10 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 -- window resize
-vim.keymap.set('n', '<S-j>', '<C-w>+')
-vim.keymap.set('n', '<S-k>', '<C-w>-')
-vim.keymap.set('n', '<S-h>', '<C-w><')
-vim.keymap.set('n', '<S-l>', '<C-w>>')
+vim.keymap.set('n', '<A-j>', '<C-w>+')
+vim.keymap.set('n', '<A-k>', '<C-w>-')
+vim.keymap.set('n', '<A-h>', '<C-w><')
+vim.keymap.set('n', '<A-l>', '<C-w>>')
 
 -- window movement
 vim.keymap.set('n', '<C-j>', '<C-w>j')
