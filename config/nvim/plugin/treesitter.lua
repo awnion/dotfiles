@@ -3,9 +3,11 @@ require'nvim-treesitter.configs'.setup {
   -- ensure_installed = { "rust", "make", "c", "lua", "vim", "vimdoc", "query" },
   ensure_installed = {
     "bash",
+    "go",
     "html",
     "javascript",
     "json",
+    "json5",
     "lua",
     "make",
     "markdown",

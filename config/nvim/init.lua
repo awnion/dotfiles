@@ -24,7 +24,11 @@ vim.opt.tabstop = 4
 vim.opt.errorbells = false
 vim.opt.visualbell = false
 
+vim.opt.updatetime = 100
+
 require('plugins')
 require('keymaps')
 
-vim.cmd("colorscheme onedark")
+vim.cmd [[colorscheme one]]
+-- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]

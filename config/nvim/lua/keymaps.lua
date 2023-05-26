@@ -21,3 +21,7 @@ vim.keymap.set('n', '<C-l>', '<C-w>l')
 vim.keymap.set('n', '<leader>ex', vim.cmd.Ex)
 vim.keymap.set('n', '<leader>ee', vim.cmd.Vex)
 vim.keymap.set('n', '<leader>es', vim.cmd.Sex)
+
+-- quickfix
+vim.keymap.set('n', '<F7>', vim.cmd.cprev)
+vim.keymap.set('n', '<F8>', vim.cmd.cnext)
