@@ -16,19 +16,18 @@ vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappin
 
 -- see https://github.com/folke/lazy.nvim#-plugin-spec
 require("lazy").setup({
-  {
-    "nvim-telescope/telescope.nvim",
-    tag = "0.1.1",
-    dependencies = { "nvim-lua/plenary.nvim" },
-  },
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-  { "tpope/vim-surround" },
+  { "nvim-telescope/telescope.nvim",    tag = "0.1.1",         dependencies = { "nvim-lua/plenary.nvim" }, },
+  { 'nvim-treesitter/nvim-treesitter',  build = ":TSUpdate" },
+  { 'tpope/vim-surround' },
 
   { 'itchyny/lightline.vim' },
   { 'airblade/vim-gitgutter' },
 
+  -- :MasonUpdate updates registry contents
+  { "williamboman/mason.nvim",          build = ":MasonUpdate" },
+  { "williamboman/mason-lspconfig.nvim" },
   -- LSP
-  { "neovim/nvim-lspconfig" },
+  { 'neovim/nvim-lspconfig' },
   { 'simrat39/rust-tools.nvim' },
 
   -- Autocompletion
@@ -43,16 +42,16 @@ require("lazy").setup({
   { 'hrsh7th/nvim-cmp' },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
 
-  -- Theme inspired by Atom
-  {
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
-  },
+  -- -- Theme inspired by Atom
+  -- {
+  --   'navarasu/onedark.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'onedark'
+  --   end,
+  -- },
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
