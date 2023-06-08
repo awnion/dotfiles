@@ -42,7 +42,7 @@ require("lazy").setup({
   { 'hrsh7th/nvim-cmp' },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim',         opts = {} },
 
   -- -- Theme inspired by Atom
   -- {
@@ -54,5 +54,12 @@ require("lazy").setup({
   -- },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',        opts = {} },
+
+  -- justfile
+  { 'NoahTheDuke/vim-just' },
+  { 'IndianBoy42/tree-sitter-just' },
+
+  -- editorconfig
+  { 'editorconfig/editorconfig-vim' },
 })
