@@ -29,6 +29,13 @@ vim.opt.updatetime = 100
 require('plugins')
 require('keymaps')
 
-vim.cmd [[colorscheme one]]
--- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+---
+--- Misc
+---
+vim.cmd.colorscheme 'one'
+
+-- format on save
+vim.cmd [[ autocmd BufWritePre * lua vim.lsp.buf.format() ]]
+
+-- disable editorconfig in gitcommit
+vim.cmd [[ autocmd FileType gitcommit let b:EditorConfig_disable = 1 ]]

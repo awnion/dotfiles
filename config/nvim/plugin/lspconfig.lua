@@ -2,15 +2,17 @@
 local lspconfig = require('lspconfig')
 
 local on_attach = function(client)
-    require'completion'.on_attach(client)
+  require 'completion'.on_attach(client)
 end
 
 lspconfig.pyright.setup {}
+lspconfig.dockerls.setup {}
+lspconfig.bashls.setup {}
 lspconfig.lua_ls.setup {}
 lspconfig.tsserver.setup {}
-lspconfig.gopls.setup{}
+lspconfig.gopls.setup {}
 lspconfig.rust_analyzer.setup {
-  on_attach=on_attach,
+  on_attach = on_attach,
   -- Server-specific settings. See `:help lspconfig-setup`
   settings = {
     ["rust-analyzer"] = {
@@ -65,6 +67,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', '<leader>ft', function()
+      print("formatting")
       vim.lsp.buf.format { async = true }
     end, opts)
   end,
