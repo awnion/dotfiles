@@ -1,3 +1,4 @@
+## vim:ft=bash:
 __ZPROFILE=1
 echo "Loading ~/.zprofile"
 
@@ -17,15 +18,14 @@ PATH=/usr/local/opt/coreutils/libexec/gnubin:"$PATH"
 
 # make snap work
 # https://askubuntu.com/questions/910821/programs-installed-via-snap-not-showing-up-in-launcher/989485#989485
-if type snap; then
-    emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
-fi
+emulate sh -c 'source /etc/profile'
+# emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
 
 # ruby
 if [[ -d /home/linuxbrew ]]; then
-    PATH=/home/linuxbrew/.linuxbrew/opt/ruby/bin:"$PATH"
+  PATH=/home/linuxbrew/.linuxbrew/opt/ruby/bin:"$PATH"
 else
-    PATH=/usr/local/opt/ruby/bin:"$PATH"
+  PATH=/usr/local/opt/ruby/bin:"$PATH"
 fi
 
 # rust
