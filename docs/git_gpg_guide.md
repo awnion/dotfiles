@@ -42,11 +42,10 @@ gpg> save
 
 ```bash
 SIGN_KEY=<signkey>
-git config --global user.signingkey $SIGN_KEY
+## instead this use ~/.gitsignkey below
+# git config --global user.signingkey $SIGN_KEY
 gpg --armor --export $SIGN_KEY # add to github
 ```
-
-# Misc
 
 Add to `.gitconfig`:
 
