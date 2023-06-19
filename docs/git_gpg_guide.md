@@ -1,6 +1,6 @@
-[original post](https://dev.to/benjaminblack/signing-git-commits-with-modern-encryption-1koh)
+# GPG git guide
 
-# Main key
+## Main key
 
 ```bash
 brew install gpg
@@ -16,7 +16,7 @@ gpg --full-generate-key --expert
 gpg --list-keys --keyid-format short
 ```
 
-# Subkey
+## Subkey
 
 ```bash
 gpg --expert --edit-key <mainkey>
@@ -38,7 +38,7 @@ Your selection? 1
 gpg> save
 ```
 
-# Finish
+## Finish
 
 ```bash
 SIGN_KEY=<signkey>
@@ -57,3 +57,7 @@ path=~/.gitsignkey
 ```bash
 echo "[user]\nsigningkey = $SIGN_KEY" > ~/.gitsignkey
 ```
+
+## References
+
+1. [original post](https://dev.to/benjaminblack/signing-git-commits-with-modern-encryption-1koh)

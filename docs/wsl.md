@@ -15,7 +15,6 @@ ubuntu config --default-user <username>
 # or wsl -u <username>
 ```
 
-
 ## WSL backup
 
 ### Export
