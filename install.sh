@@ -22,12 +22,10 @@ fi
 (
   cd "$HOME" || exit
   rm -rf .gitconfig
-  rm -rf .tmux.conf
   rm -rf .vimrc
   rm -rf .zprofile
   rm -rf .zshrc
   ln -s "$DOTFILES_DIR/gitconfig" .gitconfig
-  ln -s "$DOTFILES_DIR/tmux.conf" .tmux.conf
   ln -s "$DOTFILES_DIR/vimrc" .vimrc
   ln -s "$DOTFILES_DIR/zprofile" .zprofile
   ln -s "$DOTFILES_DIR/zshrc" .zshrc
@@ -41,16 +39,13 @@ mkdir -p "$HOME/.config"
   rm -rf gitignore_global
   rm -rf lesscolors.sh
   rm -rf nvim
-  rm -rf wezterm
   rm -rf starship.toml
   ln -s "$DOTFILES_DIR/config/alacritty" alacritty
   ln -s "$DOTFILES_DIR/config/htop" htop
   ln -s "$DOTFILES_DIR/config/gitignore_global" gitignore_global
   ln -s "$DOTFILES_DIR/config/lesscolors.sh" lesscolors.sh
   ln -s "$DOTFILES_DIR/config/nvim" nvim
-  ln -s "$DOTFILES_DIR/config/wezterm" wezterm
   ln -s "$DOTFILES_DIR/config/starship.toml" starship.toml
-  ln -s "$DOTFILES_DIR/config/zoomus.conf" zoomus.conf
 )
 
 mkdir -p "$HOME/bin"
