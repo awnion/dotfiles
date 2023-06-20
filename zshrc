@@ -27,6 +27,18 @@ setopt HIST_REDUCE_BLANKS     # Remove superfluous blanks before recording entry
 setopt HIST_VERIFY            # Don't execute immediately upon history expansion.
 setopt HIST_BEEP              # Beep when accessing nonexistent history.
 
+# Add dir for manual completions
+# To force update completion:
+#
+#     rm -f ~/.zcompdump; compinit
+#
+ZSH_COMPLETIONS_DIR="$HOME"/.config/zsh-completions
+[[ ! -d $ZSH_COMPLETIONS_DIR ]] && mkdir -p $ZSH_COMPLETIONS_DIR
+fpath+=$ZSH_COMPLETIONS_DIR
+brew_completions="/opt/homebrew/share/zsh/site-functions"
+if [[ -d $brew_completions ]]; then
+  fpath+=$brew_completions
+fi
 
 ##############################
 # antigen
@@ -48,13 +60,14 @@ antigen bundle git
 # antigen bundle git-prompt
 antigen bundle pip
 antigen bundle thuandt/zsh-pipx
-antigen bundle tmux
+# antigen bundle tmux
 antigen bundle fd
 antigen bundle fzf
 antigen bundle ansible
 antigen bundle nvm
 antigen bundle npm
 antigen bundle golang
+antigen bundle kubectl-autocomplete
 
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -178,7 +191,8 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # TODO: refactor this
 alias ls='ls --color=always -FCA'
 alias rm='rm -i'
-export BAT_THEME=OneHalfLight
+# export BAT_THEME=OneHalfLight
+export BAT_THEME=OneHalfDark
 export ZSH_HIGHLIGHT_MAXLENGTH=200
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 export ZSH_COMMAND_TIME_MIN_SECONDS=1
