@@ -35,7 +35,7 @@ setopt HIST_BEEP              # Beep when accessing nonexistent history.
 ZSH_COMPLETIONS_DIR="$HOME"/.config/zsh-completions
 [[ ! -d $ZSH_COMPLETIONS_DIR ]] && mkdir -p $ZSH_COMPLETIONS_DIR
 fpath+=$ZSH_COMPLETIONS_DIR
-brew_completions="/opt/homebrew/share/zsh/site-functions"
+brew_completions="$(brew --prefix)/share/zsh/site-functions"
 if [[ -d $brew_completions ]]; then
   fpath+=$brew_completions
 fi
@@ -185,6 +185,8 @@ export CLICOLOR=1
 # setup LS_COLORS
 eval "$(dircolors -b)"
 export LSCOLORS="exfxcxdxBxegedabagacab"
+
+export JQ_COLORS='0;31:0;39:0;39:0;39:0;32:1;39:1;39'
 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
