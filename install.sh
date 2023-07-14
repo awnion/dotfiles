@@ -6,6 +6,12 @@
 set -e
 DOTFILES_DIR=$(pwd)
 
+if [[ -n "$HOMEBREW_CELLAR" ]]; then
+  echo "root = true" >"$HOMEBREW_CELLAR"/.editorconfig
+else
+  echo "Might need to fix .editorconfig for $HOMEBREW_CELLAR in the future"
+fi
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # Vim mode vscode and others
   # enable key repeating in specific apps on MacOS

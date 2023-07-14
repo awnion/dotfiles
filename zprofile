@@ -43,7 +43,10 @@ fi
 
 # rust
 PATH="$HOME"/.cargo/bin:"$PATH"
-PATH="$HOME"/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/:"$PATH"
+# PATH="$HOME"/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/:"$PATH"
+
+# go
+PATH="$HOME"/go/bin:"$PATH"
 
 # pipx support
 PATH="$HOME"/.local/bin:"$PATH"
