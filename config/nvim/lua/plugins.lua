@@ -26,9 +26,11 @@ require("lazy").setup({
   -- :MasonUpdate updates registry contents
   { "williamboman/mason.nvim",          build = ":MasonUpdate" },
   { "williamboman/mason-lspconfig.nvim" },
+
   -- LSP
   { 'neovim/nvim-lspconfig' },
   { 'simrat39/rust-tools.nvim' },
+  { 'psf/black' },
 
   -- Autocompletion
   {
