@@ -34,8 +34,25 @@ require('keymaps')
 ---
 vim.cmd.colorscheme 'one'
 
+-- Highlight on yank
+local yankGrp = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+  command = "silent! lua vim.highlight.on_yank()",
+  group = yankGrp,
+})
+
+
 -- format on save
-vim.cmd [[ autocmd BufWritePre * lua vim.lsp.buf.format() ]]
+vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*", command = "lua vim.lsp.buf.format()" })
+
+local black_on_save = vim.api.nvim_create_augroup("black_on_save", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*.py", command = "silent! Black", group = black_on_save })
 
 -- disable editorconfig in gitcommit
-vim.cmd [[ autocmd FileType gitcommit let b:EditorConfig_disable = 1 ]]
+vim.api.nvim_create_autocmd("FileType", { pattern = "gitcommit", command = "let b:EditorConfig_disable = 1" })
+
+vim.api.nvim_create_autocmd("FileType", { pattern = "json", command = "set foldmethod=indent" })
+
+-- line endings
+vim.opt.listchars = { eol = '↵' }
+vim.opt.list = true
