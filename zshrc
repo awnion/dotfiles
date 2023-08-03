@@ -72,6 +72,8 @@ antigen bundle kubectl-autocomplete
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 
+antigen bundle git@github.com:spwhitt/nix-zsh-completions.git
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
   antigen bundle osx
 fi
