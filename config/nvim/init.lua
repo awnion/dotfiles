@@ -51,7 +51,13 @@ vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*.py", command = "silent
 -- disable editorconfig in gitcommit
 vim.api.nvim_create_autocmd("FileType", { pattern = "gitcommit", command = "let b:EditorConfig_disable = 1" })
 
-vim.api.nvim_create_autocmd("FileType", { pattern = "json", command = "set foldmethod=indent" })
+-- indent foldmethod for some formats
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "json",
+  callback = function ()
+    vim.opt_local.foldmethod = "indent"
+  end
+})
 
 -- line endings
 vim.opt.listchars = { eol = '↵' }

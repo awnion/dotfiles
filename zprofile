@@ -13,6 +13,11 @@ PATH=/usr/local/bin:"$PATH"
 # nvm support
 export NVM_DIR="$HOME"/.nvm
 
+# pyenv support
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 ## linux
 if [[ -d /home/linuxbrew/.linuxbrew ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
@@ -33,7 +38,7 @@ if [[ -d /opt/homebrew ]]; then
   fi
 
   ## TODO: make it work
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [[ -s "/opt/homebrew/opt/nvm/nvm.sh" ]] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 fi
 
 if [[ -n "$HOMEBREW_PREFIX" ]]; then
@@ -54,12 +59,17 @@ PATH="$HOME"/.cargo/bin:"$PATH"
 # go
 PATH="$HOME"/go/bin:"$PATH"
 
+# bun completions
+[[ -s "/Users/aw/.bun/_bun" ]] && source "/Users/aw/.bun/_bun"
+
 # pipx support
 PATH="$HOME"/.local/bin:"$PATH"
 
 # # tondev
 # PATH="$HOME"/.tondev/bin:"$PATH"
 # PATH="$HOME"/pro/ton/tonos-cli/target/release:"$PATH"
+
+PATH=/opt/homebrew/opt/postgresql@15/bin:"$PATH"
 
 # GOSH
 PATH="$HOME"/.gosh:"$PATH"
