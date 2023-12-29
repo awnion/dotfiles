@@ -1,0 +1,48 @@
+[cursor]
+style = "Block"
+unfocused_hollow = true
+
+[debug]
+persistent_logging = false
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 18
+
+[font.bold]
+style = "Bold"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.normal]
+family = "afio Nerd Font Mono"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = false
+
+[shell]
+args = ["--login", "-c", "zellij a || zellij"]
+program = "/bin/zsh"
+
+[window]
+decorations = "none"
+dynamic_title = true
+option_as_alt = "Both"
+startup_mode = "Maximized"
+
+[window.padding]
+x = 0
+y = 0
