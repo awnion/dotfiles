@@ -80,10 +80,6 @@ fi
 
 antigen apply
 
-# TODO: wtf?
-antigen bundle rust
-antigen apply
-
 # settings for marlonrichert/zsh-autocomplete
 # zstyle ':autocomplete:tab:*' insert-unambiguous no     # if `yes` make Tab first insert any common substring, before inserting full completion
 # zstyle ':autocomplete:tab:*' widget-style menu-complete # circular Tab and Shift-Tab for completion
@@ -252,3 +248,17 @@ git-clean-gone () {
     git branch -D $branch
   done
 }
+
+# bun completions
+[ -s "$HOME"/.bun/_bun ] && source "$HOME"/.bun/_bun
+
+# pnpm
+export PNPM_HOME="$HOME"/Library/pnpm
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+export PUPPETEER_EXECUTABLE_PATH=`which chromium`

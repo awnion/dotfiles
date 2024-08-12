@@ -54,7 +54,7 @@ vim.api.nvim_create_autocmd("FileType", { pattern = "gitcommit", command = "let 
 -- indent foldmethod for some formats
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "json",
-  callback = function ()
+  callback = function()
     vim.opt_local.foldmethod = "indent"
   end
 })

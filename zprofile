@@ -15,7 +15,7 @@ export NVM_DIR="$HOME"/.nvm
 
 # pyenv support
 export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 ## linux
@@ -56,20 +56,28 @@ fi
 PATH="$HOME"/.cargo/bin:"$PATH"
 # PATH="$HOME"/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/:"$PATH"
 
+
+# zig + zvm
+export ZVM_INSTALL="$HOME"/.zvm/self
+PATH="$ZVM_INSTALL":"$PATH"
+PATH="$HOME"/.zvm/bin:"$PATH"
+
 # go
 PATH="$HOME"/go/bin:"$PATH"
 
-# bun completions
-[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
+# bun + completions
+export BUN_INSTALL="$HOME"/.bun
+PATH="$BUN_INSTALL"/bin:"$PATH"
+#
+[[ -s "$HOME"/_bun ]] && source "$HOME"/_bun
 
 # pipx support
 PATH="$HOME"/.local/bin:"$PATH"
 
-# # tondev
-# PATH="$HOME"/.tondev/bin:"$PATH"
-# PATH="$HOME"/pro/ton/tonos-cli/target/release:"$PATH"
-
-PATH=/opt/homebrew/opt/postgresql@15/bin:"$PATH"
+# android studio
+export ANDROID_HOME=$HOME/Library/Android/sdk
+PATH=$PATH:$ANDROID_HOME/emulator
+PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # GOSH
 PATH="$HOME"/.gosh:"$PATH"
@@ -78,3 +86,7 @@ PATH="$HOME"/.gosh:"$PATH"
 PATH="$HOME"/bin:"$PATH"
 
 export PATH
+
+# brew + ruby fix: https://github.com/rails/rails/issues/38560
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+export DISABLE_SPRING=true
