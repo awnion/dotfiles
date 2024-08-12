@@ -40,9 +40,13 @@ gla = gl --all
 sl = log --decorate --graph --abbrev-commit --color --topo-order --pretty=oneline
 sla = sl --all
 
+# see https://difftastic.wilfred.me.uk/git.html
+dft = difftool
+dlog = "-c diff.external=difft log -p --ext-diff"
+
 [core]
 autocrlf = input
-	excludesfile = $HOME/.config/gitignore_global
+excludesfile = ~/.config/gitignore_global
 
 [push]
 default = simple
@@ -54,9 +58,15 @@ date = relative
 
 [init]
 defaultBranch = main
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+
+[diff]
+tool = difftastic
+
+[difftool]
+prompt = false
+
+[difftool "difftastic"]
+cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+difftool = true
