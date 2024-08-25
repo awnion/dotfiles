@@ -60,5 +60,5 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- line endings
-vim.opt.listchars = { eol = '↵' }
+-- vim.opt.listchars = { eol = '↵' }
 vim.opt.list = true
