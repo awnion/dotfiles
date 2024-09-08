@@ -19,7 +19,7 @@ x = 0
 y = 0
 
 [font.normal]
-family = "afio Nerd Font Mono"
+family = "afio"
 style = "Regular"
 
 [font.offset]
