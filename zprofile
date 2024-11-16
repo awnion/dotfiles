@@ -49,7 +49,7 @@ fi
 #nix
 # PATH=/nix/var/nix/profiles/default/bin:"$PATH"
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+  source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 
 # rust
@@ -65,11 +65,21 @@ PATH="$HOME"/.zvm/bin:"$PATH"
 # go
 PATH="$HOME"/go/bin:"$PATH"
 
+# pnpm
+export PNPM_HOME="$HOME"/Library/pnpm
+PATH="$PNPM_HOME":"$PATH"
+
 # bun + completions
 export BUN_INSTALL="$HOME"/.bun
 PATH="$BUN_INSTALL"/bin:"$PATH"
 #
 [[ -s "$HOME"/_bun ]] && source "$HOME"/_bun
+
+# deno
+PATH="$HOME"/.deno/bin:"$PATH"
+
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+export PUPPETEER_EXECUTABLE_PATH=`which chromium`
 
 # pipx support
 PATH="$HOME"/.local/bin:"$PATH"

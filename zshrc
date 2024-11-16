@@ -39,6 +39,10 @@ brew_completions="$(brew --prefix)/share/zsh/site-functions"
 if [[ -d $brew_completions ]]; then
   fpath+=$brew_completions
 fi
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then
+  export FPATH="$HOME"/.zsh/completions:"$FPATH"
+fi
 
 ##############################
 # antigen
@@ -216,7 +220,7 @@ venv () {
   venv_cases+=( "venv/bin/activate" )
   for v in $venv_cases; do
     if [[ -z "$VIRTUAL_ENV" ]] && [[ -f $v ]]; then
-      . "$v"
+      source "$v"
       echo "activate $v"
     fi
   done
@@ -248,17 +252,3 @@ git-clean-gone () {
     git branch -D $branch
   done
 }
-
-# bun completions
-[ -s "$HOME"/.bun/_bun ] && source "$HOME"/.bun/_bun
-
-# pnpm
-export PNPM_HOME="$HOME"/Library/pnpm
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-export PUPPETEER_EXECUTABLE_PATH=`which chromium`
