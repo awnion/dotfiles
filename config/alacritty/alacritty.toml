@@ -33,7 +33,7 @@ multiplier = 3
 [selection]
 save_to_clipboard = false
 
-[shell]
+[terminal.shell]
 args = ["--login", "-c", "zellij a || zellij"]
 program = "/bin/zsh"
 
@@ -46,3 +46,5 @@ startup_mode = "Maximized"
 [window.padding]
 x = 0
 y = 0
+
+[terminal]
