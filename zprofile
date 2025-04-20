@@ -54,8 +54,6 @@ fi
 
 # rust
 PATH="$HOME"/.cargo/bin:"$PATH"
-# PATH="$HOME"/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/:"$PATH"
-
 
 # zig + zvm
 export ZVM_INSTALL="$HOME"/.zvm/self
@@ -91,6 +89,9 @@ PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # GOSH
 PATH="$HOME"/.gosh:"$PATH"
+
+# Added by Windsurf
+PATH="$HOME"/.codeium/windsurf/bin:"$PATH"
 
 # ~/bin always overrides everything
 PATH="$HOME"/bin:"$PATH"

@@ -232,6 +232,12 @@ alias cvenv='createvenv'
 alias p=ipython3
 alias py=ipython3
 alias ipy=ipython3
+
+alias c='cargo'
+alias dc='docker compose'
+alias compose='docker compose'
+alias z='cd'
+
 weather () {
   clear
   echo "Weather $1 $2"
@@ -252,3 +258,4 @@ git-clean-gone () {
     git branch -D $branch
   done
 }
+
