@@ -96,6 +96,10 @@ PATH="$HOME"/.codeium/windsurf/bin:"$PATH"
 # RustRover
 PATH="/Applications/RustRover.app/Contents/MacOS":"$PATH"
 
+# wasmtime
+export WASMTIME_HOME="$HOME/.wasmtime"
+PATH="$WASMTIME_HOME/bin:$PATH"
+
 # ~/bin always overrides everything
 PATH="$HOME"/bin:"$PATH"
 
