@@ -93,6 +93,9 @@ PATH="$HOME"/.gosh:"$PATH"
 # Added by Windsurf
 PATH="$HOME"/.codeium/windsurf/bin:"$PATH"
 
+# RustRover
+PATH="/Applications/RustRover.app/Contents/MacOS":"$PATH"
+
 # ~/bin always overrides everything
 PATH="$HOME"/bin:"$PATH"
 
