@@ -30,6 +30,13 @@ require("lazy").setup({
   -- LSP
   { 'neovim/nvim-lspconfig' },
   { 'simrat39/rust-tools.nvim' },
+  {
+    'saecki/crates.nvim',
+    tag = 'stable',
+    config = function()
+      require('crates').setup()
+    end,
+  },
   { 'psf/black' },
 
   -- Autocompletion
@@ -96,7 +103,8 @@ require("lazy").setup({
     ---@type Ollama.Config
     opts = {
       -- model = "mistral",
-      model = "codeqwen",
+      -- model = "codeqwen",
+      model = "deepseek-coder-new:6.7b",
       url = "http://127.0.0.1:11434",
       serve = {
         on_start = false,

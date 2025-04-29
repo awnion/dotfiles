@@ -8,8 +8,23 @@ end
 lspconfig.pyright.setup {}
 lspconfig.dockerls.setup {}
 lspconfig.bashls.setup {}
-lspconfig.lua_ls.setup {}
-lspconfig.tsserver.setup {}
+lspconfig.lua_ls.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false
+      },
+      telemetry = {
+        enable = false
+      }
+    }
+  }
+}
+lspconfig.ts_ls.setup {}
 lspconfig.gopls.setup {}
 lspconfig.rust_analyzer.setup {
   on_attach = on_attach,
