@@ -4,7 +4,7 @@ echo "Loading ~/.zprofile"
 
 # make snap work
 # https://askubuntu.com/questions/910821/programs-installed-via-snap-not-showing-up-in-launcher/989485#989485
-emulate sh -c 'source /etc/profile'
+# emulate sh -c 'source /etc/profile'
 # emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
 
 PATH=/usr/local/sbin:"$PATH"
@@ -15,8 +15,8 @@ export NVM_DIR="$HOME"/.nvm
 
 # pyenv support
 export PYENV_ROOT="$HOME/.pyenv"
-PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
 
 ## linux
 if [[ -d /home/linuxbrew/.linuxbrew ]]; then
@@ -36,6 +36,12 @@ if [[ -d /opt/homebrew ]]; then
   if [[ -d /opt/homebrew/opt/coreutils/libexec/gnubin ]]; then
     PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:"$PATH"
   fi
+
+  # llvm
+  PATH=/opt/homebrew/opt/llvm/bin:"$PATH"
+
+  # PATH=/opt/homebrew/opt/libtool/libexec/gnubin:"$PATH"
+  # PATH=/opt/homebrew/opt/make/libexec/gnubin:"$PATH"
 
   ## TODO: make it work
   [[ -s "/opt/homebrew/opt/nvm/nvm.sh" ]] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
@@ -103,8 +109,22 @@ PATH="$WASMTIME_HOME/bin:$PATH"
 # ~/bin always overrides everything
 PATH="$HOME"/bin:"$PATH"
 
+# export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+#
+# export LDFLAGS="-L/opt/homebrew/opt/zlib/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
+
+export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"
+
 export PATH
 
 # brew + ruby fix: https://github.com/rails/rails/issues/38560
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export DISABLE_SPRING=true
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
