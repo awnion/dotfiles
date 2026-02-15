@@ -1,0 +1,109 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "edit_predictions": {
+    "provider": "zed",
+  },
+  "icon_theme": "Catppuccin Latte",
+  "language_models": {
+    "ollama": {
+      "api_url": "http://127.0.0.1:11434",
+    },
+  },
+  "agent": {
+    "show_turn_stats": true,
+    "play_sound_when_agent_done": true,
+    "default_profile": "write",
+    "default_model": {
+      "provider": "openrouter",
+      "model": "mistralai/devstral-2512:free",
+    },
+  },
+  "file_types": {
+    "Dockerfile": ["Dockerfile", "*.Dockerfile", "*.dockerfile"],
+    "Ansible": [
+      "ansible/**/*.yaml",
+      "ansible/**/*.yml",
+      "**.ansible.yml",
+      "**.ansible.yaml",
+      "**/defaults/*.yml",
+      "**/defaults/*.yaml",
+      "**/meta/*.yml",
+      "**/meta/*.yaml",
+      "**/tasks/*.yml",
+      "**/tasks/*.yaml",
+      "**/handlers/*.yml",
+      "**/handlers/*.yaml",
+      "**/group_vars/*.yml",
+      "**/group_vars/*.yaml",
+      "**/host_vars/*.yml",
+      "**/host_vars/*.yaml",
+      "**/playbooks/*.yml",
+      "**/playbooks/*.yaml",
+      "**playbook*.yml",
+      "**playbook*.yaml",
+    ],
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "theme": "Gruvbox Dark",
+  "buffer_font_size": 16,
+  "buffer_font_family": "afio",
+  "vim_mode": true,
+  "features": {
+    "completion": true,
+    "copilot": true,
+  },
+  "inlay_hints": {
+    // "enabled": true
+  },
+  "vim": {
+    "use_system_clipboard": "always",
+  },
+  "format_on_save": "on",
+  "lsp": {
+    "cargo-tom": {
+      "initialization_options": {
+        /// Search
+        "per_page": 25,
+        /// What features should be displayed on hover
+        /// All, UnusedOpt, Features,
+        "feature_display_mode": "UnusedOpt",
+        "hide_docs_info_message": true,
+        /// Sort toml on format
+        "sort_format": false,
+        /// Use stable versions in completions
+        "stable_version": true,
+        /// Offline mode uses https://github.com/frederik-uni/crates.io-dump-minfied for search
+        /// The order is non existent feel free to contribute
+        "offline": false,
+      },
+    },
+  },
+  "languages": {
+    "Python": {
+      "language_servers": [
+        // Disable basedpyright and enable ty, and otherwise
+        // use the default configuration.
+        "ty",
+        "!basedpyright",
+      ],
+      "code_actions_on_format": {
+        "source.organizeImports.ruff": true,
+      },
+      "formatter": {
+        "language_server": {
+          "name": "ruff",
+        },
+      },
+    },
+  },
+}

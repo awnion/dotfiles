@@ -53,6 +53,10 @@ mkdir -p "$HOME/.config"
   ln -s "$DOTFILES_DIR/config/lesscolors.sh" lesscolors.sh
   ln -s "$DOTFILES_DIR/config/nvim" nvim
   ln -s "$DOTFILES_DIR/config/starship.toml" starship.toml
+
+  mkdir -p zed && cd zed || exit
+  rm -rf settings.json
+  ln -s "$DOTFILES_DIR/config/zed/settings.json" settings.json
 )
 
 mkdir -p "$HOME/bin"
