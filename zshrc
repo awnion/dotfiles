@@ -268,6 +268,3 @@ compinit
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
-# Added by Antigravity
-export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
