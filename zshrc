@@ -63,12 +63,11 @@ antigen bundle docker-compose
 antigen bundle git
 # antigen bundle git-prompt
 antigen bundle pip
-antigen bundle thuandt/zsh-pipx
 # antigen bundle tmux
 antigen bundle fd
 antigen bundle fzf
 antigen bundle ansible
-antigen bundle nvm
+# antigen bundle nvm
 antigen bundle npm
 antigen bundle golang
 antigen bundle kubectl-autocomplete
@@ -269,3 +268,6 @@ compinit
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# Added by Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"

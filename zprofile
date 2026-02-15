@@ -14,9 +14,9 @@ PATH=/usr/local/bin:"$PATH"
 export NVM_DIR="$HOME"/.nvm
 
 # pyenv support
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init - zsh)"
 
 ## linux
 if [[ -d /home/linuxbrew/.linuxbrew ]]; then
@@ -69,10 +69,6 @@ PATH="$HOME"/.zvm/bin:"$PATH"
 # go
 PATH="$HOME"/go/bin:"$PATH"
 
-# pnpm
-export PNPM_HOME="$HOME"/Library/pnpm
-PATH="$PNPM_HOME":"$PATH"
-
 # bun + completions
 export BUN_INSTALL="$HOME"/.bun
 PATH="$BUN_INSTALL"/bin:"$PATH"
@@ -85,8 +81,8 @@ PATH="$HOME"/.deno/bin:"$PATH"
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 export PUPPETEER_EXECUTABLE_PATH=`which chromium`
 
-# pipx support
-PATH="$HOME"/.local/bin:"$PATH"
+# # pipx support
+# PATH="$HOME"/.local/bin:"$PATH"
 
 # android studio
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -102,12 +98,18 @@ PATH="$HOME"/.codeium/windsurf/bin:"$PATH"
 # RustRover
 PATH="/Applications/RustRover.app/Contents/MacOS":"$PATH"
 
+# Antigravity
+PATH=$HOME/.antigravity/antigravity/bin:"$PATH"
+
 # wasmtime
 export WASMTIME_HOME="$HOME/.wasmtime"
 PATH="$WASMTIME_HOME/bin:$PATH"
 
+PATH=/opt/homebrew/opt/uutils-coreutils/libexec/uubin:"$PATH"
+
 # ~/bin always overrides everything
 PATH="$HOME"/bin:"$PATH"
+
 
 # export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
@@ -121,9 +123,9 @@ export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"
 
 export PATH
 
-# brew + ruby fix: https://github.com/rails/rails/issues/38560
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-export DISABLE_SPRING=true
+# # brew + ruby fix: https://github.com/rails/rails/issues/38560
+# export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+# export DISABLE_SPRING=true
 
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
