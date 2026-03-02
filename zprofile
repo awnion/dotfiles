@@ -81,8 +81,8 @@ PATH="$HOME"/.deno/bin:"$PATH"
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 export PUPPETEER_EXECUTABLE_PATH=`which chromium`
 
-# # pipx support
-# PATH="$HOME"/.local/bin:"$PATH"
+# uvx or pipx support
+PATH="$HOME"/.local/bin:"$PATH"
 
 # android studio
 export ANDROID_HOME=$HOME/Library/Android/sdk
