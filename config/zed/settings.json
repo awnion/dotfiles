@@ -7,6 +7,17 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "agent_buffer_font_size": 15.0,
+  "ui_font_size": 14.0,
+  "buffer_font_weight": 400.0,
+  "git_panel": {
+    "tree_view": true,
+  },
+  "agent_servers": {
+    "opencode": {
+      "type": "registry",
+    },
+  },
   "edit_predictions": {
     "provider": "zed",
   },
@@ -17,12 +28,18 @@
     },
   },
   "agent": {
+    "inline_assistant_model": {
+      "provider": "openrouter",
+      "model": "openrouter/free",
+      "enable_thinking": false,
+    },
     "show_turn_stats": true,
     "play_sound_when_agent_done": true,
     "default_profile": "write",
     "default_model": {
+      "enable_thinking": true,
       "provider": "openrouter",
-      "model": "mistralai/devstral-2512:free",
+      "model": "openrouter/free",
     },
   },
   "file_types": {
@@ -87,8 +104,21 @@
         "offline": false,
       },
     },
+    "yaml-language-server": {
+      "settings": {
+        "yaml": {
+          "format": {
+            "enable": "true",
+            "bracketSpacing": "true",
+          },
+        },
+      },
+    },
   },
   "languages": {
+    "YAML": {
+      "formatter": "language_server",
+    },
     "Python": {
       "language_servers": [
         // Disable basedpyright and enable ty, and otherwise
