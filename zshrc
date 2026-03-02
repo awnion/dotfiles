@@ -1,7 +1,6 @@
-#!/bin/bash
-# ^^^^^^^^^ fake shebang for editors
+# vim: ft=zsh
 
-echo "Loading ~/.zshrc"
+[[ -o interactive ]] && echo "Loading ~/.zshrc"
 if [[ -z "$__ZPROFILE" ]]; then
   source "$HOME"/.zprofile
 fi
@@ -35,9 +34,9 @@ setopt HIST_BEEP              # Beep when accessing nonexistent history.
 ZSH_COMPLETIONS_DIR="$HOME"/.config/zsh-completions
 [[ ! -d $ZSH_COMPLETIONS_DIR ]] && mkdir -p $ZSH_COMPLETIONS_DIR
 fpath+=$ZSH_COMPLETIONS_DIR
-brew_completions="$(brew --prefix)/share/zsh/site-functions"
-if [[ -d $brew_completions ]]; then
-  fpath+=$brew_completions
+if [[ -n "$HOMEBREW_PREFIX" ]]; then
+  brew_completions="$HOMEBREW_PREFIX/share/zsh/site-functions"
+  [[ -d $brew_completions ]] && fpath+=$brew_completions
 fi
 # Add deno completions to search path
 if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then
@@ -56,7 +55,7 @@ export KEYTIMEOUT=1
 ##############################
 # prompt
 ##############################
-if [[ -x "$(which starship)" ]]; then
+if (( $+commands[starship] )); then
   eval "$(starship init zsh)"
 else
   # full list of vars: http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
@@ -76,7 +75,7 @@ fi
 # TODO: generalize mb?
 # export VIRTUAL_ENV_DISABLE_PROMPT=1
 python_venv () {
-  if [[ ! -z "$VIRTUAL_ENV" ]]; then
+  if [[ -n "$VIRTUAL_ENV" ]]; then
     echo -ne "$VIRTUAL_ENV" | sed -E 's:.*/([^/]+/[^/]+)$:(\1):'
   fi
 }
@@ -127,7 +126,7 @@ f () {
   new_dir="\
     $(fd -H -I -E .git -t d \
     | fzf --preview='ls --color=always -gGhFA --group-directories-first {}')"
-  if [[ ! -z "$new_dir" ]]; then
+  if [[ -n "$new_dir" ]]; then
     cd $base_dir/$new_dir
   fi
 }
@@ -165,8 +164,8 @@ export ZSH_COMMAND_TIME_MIN_SECONDS=1
 export TIMEFMT=$'\n\nCPU\t%P\nuser\t%*U\nsys\t%*S\ntotal\t%*E'
 # smart cd
 cd () {
-  builtin cd $@ && \
-  COLUMNS=$(tput cols) ls --color=always -FCA | tail -5
+  builtin cd "$@" && \
+  ls --color=always -FCA | tail -5
 }
 
 # python
@@ -218,11 +217,8 @@ git-clean-gone () {
   done
 }
 
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=($HOME/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
+# Docker Desktop completions
+fpath=("$HOME"/.docker/completions $fpath)
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
