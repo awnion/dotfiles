@@ -48,3 +48,8 @@ x = 0
 y = 0
 
 [terminal]
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"
