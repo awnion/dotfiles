@@ -1,0 +1,65 @@
+shell = "zsh"
+
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+
+[templates]
+defer = "{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}"
+
+# Oh My Zsh: set ZSH and source needed libs
+[plugins.omz-setup]
+inline = """
+export ZSH="$HOME/.local/share/sheldon/repos/github.com/ohmyzsh/ohmyzsh"
+autoload -Uz compinit
+compinit
+source "$ZSH/lib/git.zsh"
+source "$ZSH/lib/completion.zsh"
+source "$ZSH/lib/history.zsh"
+"""
+
+# OMZ plugins
+[plugins.omz-git]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/git"
+use = ["git.plugin.zsh"]
+
+[plugins.omz-docker]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/docker"
+use = ["docker.plugin.zsh"]
+apply = ["defer"]
+
+[plugins.omz-fzf]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/fzf"
+use = ["fzf.plugin.zsh"]
+
+[plugins.omz-golang]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/golang"
+use = ["golang.plugin.zsh"]
+
+[plugins.omz-ansible]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/ansible"
+use = ["ansible.plugin.zsh"]
+
+[plugins.omz-macos]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/macos"
+use = ["macos.plugin.zsh"]
+
+# zsh-users plugins
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+apply = ["defer"]
+
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+dir = "src"
+apply = ["fpath"]
+
+# Must be last
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+apply = ["defer"]

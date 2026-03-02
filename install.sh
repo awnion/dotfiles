@@ -47,12 +47,15 @@ mkdir -p "$HOME/.config"
   rm -rf lesscolors.sh
   rm -rf nvim
   rm -rf starship.toml
+  rm -rf sheldon
+
   ln -s "$DOTFILES_DIR/config/alacritty" alacritty
   ln -s "$DOTFILES_DIR/config/htop" htop
   ln -s "$DOTFILES_DIR/config/gitignore_global" gitignore_global
   ln -s "$DOTFILES_DIR/config/lesscolors.sh" lesscolors.sh
   ln -s "$DOTFILES_DIR/config/nvim" nvim
   ln -s "$DOTFILES_DIR/config/starship.toml" starship.toml
+  ln -s "$DOTFILES_DIR/config/sheldon" sheldon
 
   mkdir -p zed && cd zed || exit
   rm -rf settings.json

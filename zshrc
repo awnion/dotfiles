@@ -45,49 +45,9 @@ if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then
 fi
 
 ##############################
-# antigen
+# sheldon
 ##############################
-if [[ ! -d "$HOME"/.config/antigen ]]; then
-  git clone https://github.com/zsh-users/antigen.git "$HOME"/.config/antigen
-fi
-source "$HOME"/.config/antigen/antigen.zsh
-antigen use oh-my-zsh
-
-# sometimes buggy/laggy
-# antigen bundle marlonrichert/zsh-autocomplete
-antigen bundle zsh-users/zsh-autosuggestions
-
-antigen bundle django
-antigen bundle docker
-antigen bundle docker-compose
-antigen bundle git
-# antigen bundle git-prompt
-antigen bundle pip
-# antigen bundle tmux
-antigen bundle fd
-antigen bundle fzf
-antigen bundle ansible
-# antigen bundle nvm
-antigen bundle npm
-antigen bundle golang
-antigen bundle kubectl-autocomplete
-
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-antigen bundle git@github.com:spwhitt/nix-zsh-completions.git
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  antigen bundle osx
-fi
-
-antigen apply
-
-# settings for marlonrichert/zsh-autocomplete
-# zstyle ':autocomplete:tab:*' insert-unambiguous no     # if `yes` make Tab first insert any common substring, before inserting full completion
-# zstyle ':autocomplete:tab:*' widget-style menu-complete # circular Tab and Shift-Tab for completion
-zstyle ':autocomplete:*' min-delay .3
-# zstyle ':autocomplete:*' key-binding off
+eval "$(sheldon source)"
 
 # Esc timeout for vi mode
 export KEYTIMEOUT=1
