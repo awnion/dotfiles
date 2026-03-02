@@ -2,18 +2,8 @@
 __ZPROFILE=1
 echo "Loading ~/.zprofile"
 
-# make snap work
-# https://askubuntu.com/questions/910821/programs-installed-via-snap-not-showing-up-in-launcher/989485#989485
-# emulate sh -c 'source /etc/profile'
-# emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
-
 PATH=/usr/local/sbin:"$PATH"
 PATH=/usr/local/bin:"$PATH"
-
-# pyenv support
-# export PYENV_ROOT="$HOME/.pyenv"
-# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init - zsh)"
 
 ## linux
 if [[ -d /home/linuxbrew/.linuxbrew ]]; then
@@ -36,12 +26,6 @@ fi
 if [[ -n "$HOMEBREW_PREFIX" ]]; then
   # ruby
   PATH="$HOMEBREW_PREFIX"/opt/ruby/bin:"$PATH"
-fi
-
-#nix
-# PATH=/nix/var/nix/profiles/default/bin:"$PATH"
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 
 # rust
@@ -91,9 +75,10 @@ PATH=/opt/homebrew/opt/uutils-coreutils/libexec/uubin:"$PATH"
 # ~/bin always overrides everything
 PATH="$HOME"/bin:"$PATH"
 
-export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig:$PKG_CONFIG_PATH"
-
-export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig:$PKG_CONFIG_PATH"
+  export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"
+fi
 
 export PATH
 
