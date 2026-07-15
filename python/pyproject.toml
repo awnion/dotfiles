@@ -1,0 +1,14 @@
+[project]
+name = "dotfiles-python"
+version = "0.1.0"
+description = "Lightweight shared Python environment for shell use"
+requires-python = ">=3.14,<3.15"
+dependencies = [
+  "asyncpg",
+  "httpx",
+  "pydantic",
+  "python-dotenv",
+]
+
+[tool.uv]
+package = false

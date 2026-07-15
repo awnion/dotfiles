@@ -57,7 +57,8 @@
     },
     "claude-acp": {
       "default_config_options": {
-        "model": "opus",
+        "mode": "bypassPermissions",
+        "model": "gpt-5.6-sol",
       },
       "type": "registry",
     },
@@ -75,6 +76,24 @@
   },
   "icon_theme": "Catppuccin Latte",
   "language_models": {
+    "anthropic_compatible": {
+      "Claude GPT": {
+        "api_url": "http://127.0.0.1:8317",
+        "available_models": [
+          {
+            "name": "gpt-5.6-sol",
+            "max_tokens": 270000,
+            "max_output_tokens": 64000,
+            "extra_beta_headers": [],
+            "capabilities": {
+              "tools": true,
+              "images": true,
+              "prompt_caching": false
+            }
+          }
+        ]
+      }
+    },
     "ollama": {
       "api_url": "http://127.0.0.1:11434",
     },
@@ -114,9 +133,10 @@
     "dock": "left",
     "inline_assistant_model": {
       "provider": "openai-subscribed",
-      "model": "gpt-5.5",
+      "model": "gpt-5.6-terra",
       "enable_thinking": false,
     },
+    "inline_assistant_use_streaming_tools": false,
     "show_turn_stats": true,
     "play_sound_when_agent_done": "always",
     "default_profile": "write",

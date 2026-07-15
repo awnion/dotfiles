@@ -1,0 +1,10 @@
+.git
+.gitignore
+.claude
+.codebase-memory
+.DS_Store
+.luarc.json
+**/.DS_Store
+**/.cache
+**/.venv
+**/node_modules

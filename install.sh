@@ -1,73 +1,107 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# TODO: Maybe rewrite this on python??
-#       check this: https://github.com/anishathalye/dotbot/blob/master/bin/dotbot
+DOTFILES_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+BACKUP_ROOT="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
+BACKUP_CREATED=0
+APPLY_MACOS_DEFAULTS=0
 
-set -e
-DOTFILES_DIR=$(pwd)
+usage () {
+  printf 'Usage: %s [--macos-defaults]\n' "${0##*/}"
+}
 
-if [[ -n "$HOMEBREW_CELLAR" ]]; then
-  echo "root = true" >"$HOMEBREW_CELLAR"/.editorconfig
-else
-  echo "Might need to fix .editorconfig for $HOMEBREW_CELLAR in the future"
+for argument in "$@"; do
+  case "$argument" in
+    --macos-defaults) APPLY_MACOS_DEFAULTS=1 ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      printf 'Unknown option: %s\n' "$argument" >&2
+      usage >&2
+      exit 2
+      ;;
+  esac
+done
+
+backup_target () {
+  local target="$1"
+  local relative backup
+
+  relative="${target#"$HOME"/}"
+  backup="$BACKUP_ROOT/$relative"
+  mkdir -p "$(dirname -- "$backup")"
+  mv -- "$target" "$backup"
+  BACKUP_CREATED=1
+  printf 'Backed up %s -> %s\n' "$target" "$backup"
+}
+
+link_item () {
+  local source="$1"
+  local target="$2"
+
+  if [[ ! -e "$source" ]] && [[ ! -L "$source" ]]; then
+    printf 'Missing source: %s\n' "$source" >&2
+    return 1
+  fi
+
+  if [[ -L "$target" ]] && [[ "$(readlink "$target")" == "$source" ]]; then
+    return 0
+  fi
+
+  if [[ -e "$target" ]] || [[ -L "$target" ]]; then
+    backup_target "$target"
+  fi
+
+  mkdir -p "$(dirname -- "$target")"
+  ln -s "$source" "$target"
+  printf 'Linked %s -> %s\n' "$target" "$source"
+}
+
+apply_macos_defaults () {
+  [[ "${OSTYPE:-}" == darwin* ]] || return 0
+
+  defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+  defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false
+  defaults write com.visualstudio.code.oss ApplePressAndHoldEnabled -bool false
+  defaults write -g ApplePressAndHoldEnabled -bool false
+  defaults write -g InitialKeyRepeat -int 15
+  defaults write -g KeyRepeat -int 1
+}
+
+link_item "$DOTFILES_DIR/bash_profile" "$HOME/.bash_profile"
+link_item "$DOTFILES_DIR/bashrc" "$HOME/.bashrc"
+link_item "$DOTFILES_DIR/gitconfig" "$HOME/.gitconfig"
+link_item "$DOTFILES_DIR/vimrc" "$HOME/.vimrc"
+link_item "$DOTFILES_DIR/zprofile" "$HOME/.zprofile"
+link_item "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
+
+link_item "$DOTFILES_DIR/config/alacritty" "$HOME/.config/alacritty"
+link_item "$DOTFILES_DIR/config/gitignore_global" "$HOME/.config/gitignore_global"
+link_item "$DOTFILES_DIR/config/htop" "$HOME/.config/htop"
+link_item "$DOTFILES_DIR/config/nvim" "$HOME/.config/nvim"
+link_item "$DOTFILES_DIR/config/sheldon" "$HOME/.config/sheldon"
+link_item "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
+link_item "$DOTFILES_DIR/config/zed/settings.json" "$HOME/.config/zed/settings.json"
+
+link_item "$DOTFILES_DIR/python" "$HOME/.config/dotfiles/python"
+
+legacy_lesscolors="$HOME/.config/lesscolors.sh"
+if [[ -L "$legacy_lesscolors" ]] &&
+   [[ "$(readlink "$legacy_lesscolors")" == "$DOTFILES_DIR/config/lesscolors.sh" ]]; then
+  rm -- "$legacy_lesscolors"
+  printf 'Removed stale link %s\n' "$legacy_lesscolors"
 fi
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  # Vim mode vscode and others
-  # enable key repeating in specific apps on MacOS
-  defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false         # For VS Code
-  defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false # For VS Code Insider
-  defaults write com.visualstudio.code.oss ApplePressAndHoldEnabled -bool false    # For VS Codium
-  defaults write -g ApplePressAndHoldEnabled -bool false                           # For global
-  # defaults delete -g ApplePressAndHoldEnabled                                    # If necessary, reset global default
+link_item "$DOTFILES_DIR/bin/colorless" "$HOME/bin/colorless"
+link_item "$DOTFILES_DIR/bin/python" "$HOME/bin/python"
+link_item "$DOTFILES_DIR/bin/python3" "$HOME/bin/python3"
 
-  # make repeat speed lighting fast
-  defaults write -g InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms)
-  defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
+if (( APPLY_MACOS_DEFAULTS )); then
+  apply_macos_defaults
 fi
 
-(
-  cd "$HOME" || exit
-  rm -rf .bash_profile
-  rm -rf .gitconfig
-  rm -rf .vimrc
-  rm -rf .zprofile
-  rm -rf .zshrc
-  ln -s "$DOTFILES_DIR/bash_profile" .bash_profile
-  ln -s "$DOTFILES_DIR/gitconfig" .gitconfig
-  ln -s "$DOTFILES_DIR/vimrc" .vimrc
-  ln -s "$DOTFILES_DIR/zprofile" .zprofile
-  ln -s "$DOTFILES_DIR/zshrc" .zshrc
-)
-
-mkdir -p "$HOME/.config"
-(
-  cd "$HOME/.config" || exit
-  rm -rf alacritty
-  rm -rf gitignore_global
-  rm -rf htop
-  rm -rf lesscolors.sh
-  rm -rf nvim
-  rm -rf sheldon
-  rm -rf starship.toml
-
-  ln -s "$DOTFILES_DIR/config/alacritty" alacritty
-  ln -s "$DOTFILES_DIR/config/gitignore_global" gitignore_global
-  ln -s "$DOTFILES_DIR/config/htop" htop
-  ln -s "$DOTFILES_DIR/config/lesscolors.sh" lesscolors.sh
-  ln -s "$DOTFILES_DIR/config/nvim" nvim
-  ln -s "$DOTFILES_DIR/config/sheldon" sheldon
-  ln -s "$DOTFILES_DIR/config/starship.toml" starship.toml
-
-  mkdir -p zed && cd zed || exit
-  rm -rf settings.json
-  ln -s "$DOTFILES_DIR/config/zed/settings.json" settings.json
-)
-
-mkdir -p "$HOME/bin"
-(
-  cd "$HOME/bin" || exit
-  rm -rf colorless
-  ln -s "$DOTFILES_DIR/bin/colorless" colorless
-  chmod +x colorless
-)
+if (( BACKUP_CREATED )); then
+  printf 'Backups saved under %s\n' "$BACKUP_ROOT"
+fi

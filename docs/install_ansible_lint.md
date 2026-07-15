@@ -1,8 +1,9 @@
-#
+# Run ansible-lint with uvx
 
-## Install ansible lint with pipx
+Run the CLI in an isolated, cached environment without installing it globally:
 
 ```bash
-pipx install -f --include-deps ansible
-pipx inject --include-apps ansible 'ansible-lint[community,yamllint]' jmespath netaddr
+uvx ansible-lint
 ```
+
+For a project that needs Ansible collections or extra Python dependencies, declare them in that project's `pyproject.toml` instead of injecting them into a shared tool environment.

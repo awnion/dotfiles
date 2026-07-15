@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -e
+
+if [[ -n "${VIRTUAL_ENV:-}" ]]; then
+  if [[ -x "$VIRTUAL_ENV/bin/python" ]]; then
+    exec "$VIRTUAL_ENV/bin/python" "$@"
+  fi
+
+  printf 'python: active virtualenv has no executable: %s/bin/python\n' "$VIRTUAL_ENV" >&2
+  exit 126
+fi
+
+uv_bin="$(command -v uv || true)"
+if [[ -z "$uv_bin" ]]; then
+  printf 'python: uv is not installed or not on PATH\n' >&2
+  exit 127
+fi
+
+project="${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles/python"
+if [[ ! -f "$project/pyproject.toml" ]] || [[ ! -f "$project/uv.lock" ]]; then
+  printf 'python: shared uv project is not installed at %s\n' "$project" >&2
+  exit 127
+fi
+
+environment="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles/python"
+exec env UV_PROJECT_ENVIRONMENT="$environment" \
+  "$uv_bin" run --locked --project "$project" python "$@"

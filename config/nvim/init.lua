@@ -2,7 +2,7 @@ HOME = os.getenv("HOME")
 
 vim.opt.swapfile = true
 vim.opt.number = true
-vim.opt.mouse = a
+vim.opt.mouse = "a"
 vim.opt.termguicolors = true
 
 vim.opt.syntax = "on"

@@ -62,7 +62,7 @@ recognize_signal_code = true
 
 [python]
 style = "bold purple"
-python_binary = ["python3", "python", "python2"]
+python_binary = ["python", "python3"]
 format = '[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style) '
 
 [time]

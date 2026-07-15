@@ -99,20 +99,5 @@ require("lazy").setup({
         mode = { "n", "v" },
       },
     },
-
-    ---@type Ollama.Config
-    opts = {
-      -- model = "mistral",
-      -- model = "codeqwen",
-      model = "deepseek-coder-new:6.7b",
-      url = "http://127.0.0.1:11434",
-      serve = {
-        on_start = false,
-        command = "ollama",
-        args = { "serve" },
-        stop_command = "pkill",
-        stop_args = { "-SIGTERM", "ollama" },
-      },
-    }
   }
 })

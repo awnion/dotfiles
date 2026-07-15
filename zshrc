@@ -1,11 +1,18 @@
 # vim: ft=zsh
 
-[[ -o interactive ]] && echo "Loading ~/.zshrc"
-if [[ -z "$__ZPROFILE" ]]; then
-  source "$HOME"/.zprofile
+if [[ -z "${__ZPROFILE:-}" ]] && [[ -r "$HOME/.zprofile" ]]; then
+  source "$HOME/.zprofile"
 fi
 
-export LANGUAGE=en_US.UTF-8
+typeset -U fpath
+
+if [[ -r "$HOME/.orbstack/shell/init.zsh" ]]; then
+  source "$HOME/.orbstack/shell/init.zsh"
+fi
+
+if [[ -d "$HOME/.docker/completions" ]]; then
+  fpath=("$HOME/.docker/completions" $fpath)
+fi
 
 ##############################
 # history
@@ -34,7 +41,7 @@ setopt HIST_BEEP              # Beep when accessing nonexistent history.
 ZSH_COMPLETIONS_DIR="$HOME"/.config/zsh-completions
 [[ ! -d $ZSH_COMPLETIONS_DIR ]] && mkdir -p $ZSH_COMPLETIONS_DIR
 fpath+=$ZSH_COMPLETIONS_DIR
-if [[ -n "$HOMEBREW_PREFIX" ]]; then
+if [[ -n "${HOMEBREW_PREFIX:-}" ]]; then
   brew_completions="$HOMEBREW_PREFIX/share/zsh/site-functions"
   [[ -d $brew_completions ]] && fpath+=$brew_completions
 fi
@@ -46,7 +53,9 @@ fi
 ##############################
 # sheldon
 ##############################
-eval "$(sheldon source)"
+if [[ -o interactive ]] && (( $+commands[sheldon] )); then
+  eval "$(sheldon source)"
+fi
 
 # Esc timeout for vi mode
 export KEYTIMEOUT=1
@@ -123,11 +132,11 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=info:#ac84ad,prompt:#ff0000,p
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=marker:#cc62cc,spinner:#5c61ff,header:#5d9191"
 
 f () {
-  new_dir="\
-    $(fd -H -I -E .git -t d \
+  local new_dir
+  new_dir="$(fd -H -I -E .git -t d \
     | fzf --preview='ls --color=always -gGhFA --group-directories-first {}')"
   if [[ -n "$new_dir" ]]; then
-    cd $base_dir/$new_dir
+    cd -- "$new_dir"
   fi
 }
 # alias fh='f ~'
@@ -143,7 +152,9 @@ export CLICOLOR=1
 # ls colors could be generated here: https://geoff.greer.fm/lscolors/
 # but seems like GNU dircolors with GNU ls is better
 # setup LS_COLORS
-eval "$(dircolors -b)"
+if (( $+commands[dircolors] )); then
+  eval "$(dircolors -b)"
+fi
 export LSCOLORS="exfxcxdxBxegedabagacab"
 
 export JQ_COLORS='0;31:0;39:0;39:0;39:0;32:1;39:1;39'
@@ -167,29 +178,6 @@ cd () {
   builtin cd "$@" && \
   ls --color=always -FCA | tail -5
 }
-
-# python
-export IPYTHONDIR="$HOME"/.config/ipython
-
-# python venv trick
-venv () {
-  local -a venv_cases
-  venv_cases+=( ".venv/bin/activate" )
-  venv_cases+=( "venv/bin/activate" )
-  for v in $venv_cases; do
-    if [[ -z "$VIRTUAL_ENV" ]] && [[ -f $v ]]; then
-      source "$v"
-      echo "activate $v"
-    fi
-  done
-}
-# TODO: need check if we are in ZSH unles won't work
-alias createvenv='python3 -m venv --prompt "$pwd:h:t" .venv'
-alias cvenv='createvenv'
-
-alias p=ipython3
-alias py=ipython3
-alias ipy=ipython3
 
 alias c='cargo'
 alias dc='docker compose'
@@ -217,9 +205,5 @@ git-clean-gone () {
   done
 }
 
-# Docker Desktop completions
-fpath=("$HOME"/.docker/completions $fpath)
-
 # bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
+[[ -r "$BUN_INSTALL/_bun" ]] && source "$BUN_INSTALL/_bun"
