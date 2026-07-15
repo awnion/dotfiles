@@ -28,10 +28,12 @@ fi
 
 (
   cd "$HOME" || exit
+  rm -rf .bash_profile
   rm -rf .gitconfig
   rm -rf .vimrc
   rm -rf .zprofile
   rm -rf .zshrc
+  ln -s "$DOTFILES_DIR/bash_profile" .bash_profile
   ln -s "$DOTFILES_DIR/gitconfig" .gitconfig
   ln -s "$DOTFILES_DIR/vimrc" .vimrc
   ln -s "$DOTFILES_DIR/zprofile" .zprofile
