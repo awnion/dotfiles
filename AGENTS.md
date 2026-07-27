@@ -7,8 +7,7 @@ portable, and safe to apply repeatedly.
 
 - Root files are shell and terminal configuration; `install.sh` links them into
   the home directory.
-- `config/` mirrors application configuration under `~/.config` (plus Codex at
-  `~/.codex/config.toml`).
+- `config/` mirrors application configuration under `~/.config`.
 - `bin/` contains small user-facing utilities.
 - `python/` defines the locked shared uv environment.
 - `docs/` contains standalone setup notes.
@@ -42,6 +41,7 @@ Run checks relevant to the edited files:
 bash -n install.sh bash_profile bashrc
 zsh -n zprofile zshrc
 uv lock --check --project python
+.githooks/pre-commit
 git diff --check
 ```
 

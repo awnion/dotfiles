@@ -84,3 +84,15 @@ docker run --rm -it ghcr.io/awnion/dotfiles
 docker build -t dotfiles .
 docker run --rm -it dotfiles
 ```
+
+## Commit checks
+
+Enable the tracked pre-commit hook once per clone:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+The hook runs Gitleaks against staged changes. `.gitleaks.toml` enables the
+standard rules, while `.gitleaks-privacy.toml` rejects personal email addresses,
+absolute macOS home paths, and Codex trusted-project entries.

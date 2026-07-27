@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  printf 'gitleaks is required to commit in this repository.\n' >&2
+  exit 1
+fi
+
+gitleaks git --staged \
+  --config "$repo_root/.gitleaks.toml" \
+  --no-banner \
+  --redact=100 \
+  "$repo_root"
+
+exec gitleaks git --staged \
+  --config "$repo_root/.gitleaks-privacy.toml" \
+  --no-banner \
+  --redact=100 \
+  "$repo_root"

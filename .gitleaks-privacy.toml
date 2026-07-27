@@ -1,0 +1,29 @@
+title = "dotfiles privacy rules"
+
+[[allowlists]]
+description = "Git internals are outside the working-tree privacy check"
+paths = ['''^\.git/''']
+
+[[rules]]
+id = "absolute-macos-home-path"
+description = "Absolute macOS home directory"
+regex = '''/Users/[A-Za-z0-9._/-]+'''
+
+[[rules]]
+id = "personal-email-address"
+description = "Personal email address"
+regex = '''[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'''
+keywords = ["@"]
+
+[[rules.allowlists]]
+description = "Documentation-only email domains"
+regexes = [
+  '''[A-Za-z0-9._%+-]+@example\.com''',
+  '''[A-Za-z0-9._%+-]+@users\.noreply\.github\.com''',
+]
+
+[[rules]]
+id = "codex-trusted-project"
+description = "Codex trusted-project entry"
+regex = '''\[projects\."/[^\"]+"\]'''
+keywords = ["[projects."]
