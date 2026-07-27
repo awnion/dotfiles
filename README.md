@@ -10,7 +10,9 @@ The installer resolves the repository from its own path, so it can be run from a
 bash /path/to/dotfiles/install.sh
 ```
 
-Existing files that conflict with managed links are moved under `~/.dotfiles-backup/<timestamp>/`. Re-running the installer leaves correct links unchanged.
+Existing files that conflict with managed links are moved under
+`_backups/<timestamp>/` inside the repository. The ignored backup directory is
+kept out of Git. Re-running the installer leaves correct links unchanged.
 
 macOS keyboard defaults are intentionally separate from link installation:
 

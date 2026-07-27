@@ -2,7 +2,7 @@
 set -euo pipefail
 
 DOTFILES_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
-BACKUP_ROOT="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
+BACKUP_ROOT="$DOTFILES_DIR/_backups/$(date +%Y%m%d-%H%M%S)"
 BACKUP_CREATED=0
 APPLY_MACOS_DEFAULTS=0
 
