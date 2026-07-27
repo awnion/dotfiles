@@ -1,4 +1,5 @@
 .DS_Store
 /_backups/
+/config/codex/
 
 config/nvim/.netrwhist

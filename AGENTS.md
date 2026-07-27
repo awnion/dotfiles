@@ -25,6 +25,8 @@ portable, and safe to apply repeatedly.
 - Never commit credentials, tokens, authentication state, caches, or host-only
   values. Put machine-specific paths and secrets in
   `~/.config/dotfiles/local.sh`.
+- Keep personal agent configuration out of this repository. In particular, do
+  not commit Codex configuration, trusted-project lists, or absolute home paths.
 - Follow `.editorconfig`: LF endings, final newline, two-space indentation for
   shell/config files, and four spaces for Python.
 - When Python dependencies change, update both `python/pyproject.toml` and
