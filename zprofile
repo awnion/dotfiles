@@ -143,6 +143,7 @@ if [[ -e "$HOME/.claude/claude-code-proxy-enabled" ]]; then
   export ANTHROPIC_MODEL=gpt-5.6-sol
   export ANTHROPIC_SMALL_FAST_MODEL=gpt-5.6-luna
   export CLAUDE_CODE_SUBAGENT_MODEL=gpt-5.6-sol
+  export CLAUDE_CODE_AUTO_COMPACT_WINDOW=270000
 fi
 
 # Machine-specific paths and secrets belong here, outside the repository.
