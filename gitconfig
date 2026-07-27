@@ -1,9 +1,8 @@
-[user]
-email = blinovsv@gmail.com
-name = Sergei Blinov
-
 [include]
 path=~/.gitsignkey
+
+[include]
+path=~/.gitconfig.local
 
 [commit]
 gpgsign = true
