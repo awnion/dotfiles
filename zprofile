@@ -99,43 +99,6 @@ export PATH
 
 export LANGUAGE=en_US.UTF-8
 
-# Portable virtual-environment helpers.
-venv () {
-  local candidate
-
-  if [[ -n "${VIRTUAL_ENV:-}" ]]; then
-    printf 'virtualenv already active: %s\n' "$VIRTUAL_ENV"
-    return 0
-  fi
-
-  for candidate in .venv/bin/activate venv/bin/activate; do
-    if [[ -f "$candidate" ]]; then
-      source "$candidate"
-      printf 'activated %s\n' "$candidate"
-      return 0
-    fi
-  done
-
-  printf 'no .venv or venv found in %s\n' "$PWD" >&2
-  return 1
-}
-
-createvenv () {
-  local project_name="${PWD##*/}"
-  [[ -n "$project_name" ]] || project_name=/
-
-  if ! command -v uv >/dev/null 2>&1; then
-    printf 'createvenv: uv is not installed or not on PATH\n' >&2
-    return 127
-  fi
-
-  command uv venv --python 3.14.6 --prompt "$project_name" "$@" .venv
-}
-
-cvenv () {
-  createvenv "$@"
-}
-
 # Optionally routes each session through the local proxy.
 if [[ -e "$HOME/.claude/claude-code-proxy-enabled" ]]; then
   export ANTHROPIC_BASE_URL=http://127.0.0.1:8317
