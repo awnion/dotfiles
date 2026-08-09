@@ -24,6 +24,7 @@
   "ui_font_size": 14.0,
   "buffer_font_weight": 400.0,
   "git_panel": {
+    "group_by": "staging",
     "dock": "right",
     "sort_by_path": true,
     "tree_view": true,
@@ -36,6 +37,9 @@
       "type": "registry",
     },
     "poolside": {
+      "default_config_options": {
+        "model": "poolside/laguna-s-2.1"
+      },
       "type": "registry",
     },
     "qwen-code": {
@@ -48,10 +52,16 @@
       "type": "registry",
     },
     "codex-acp": {
+      "favorite_config_option_values": {
+        "reasoning_effort": [
+          "low"
+        ]
+      },
       "default_config_options": {
-        "reasoning_effort": "high",
+        "fast-mode": true,
+        "reasoning_effort": "max",
         "mode": "agent-full-access",
-        "model": "gpt-5.6-sol",
+        "model": "gpt-5.6-luna",
       },
       "type": "registry",
     },
@@ -64,7 +74,7 @@
     },
     "opencode": {
       "default_config_options": {
-        "effort": "medium",
+        "effort": "low",
         "model": "openai/gpt-5.6-sol",
       },
       "favorite_models": ["llama-local/Omnicoder / Qwen 3.5 9B"],
