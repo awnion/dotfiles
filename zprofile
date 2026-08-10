@@ -92,7 +92,6 @@ if [[ "${OSTYPE:-}" == darwin* ]]; then
   fi
 fi
 
-# User commands and uv-managed tools override system executables.
 _dotfiles_path_prepend "$HOME/.local/bin"
 _dotfiles_path_prepend "$HOME/bin"
 export PATH

@@ -38,40 +38,6 @@ Machine-specific paths and secrets can be placed in the untracked file:
 
 PATH changes are idempotent, so nested shells do not multiply entries.
 
-## Python and uv
-
-`python` and `python3` resolve to the same lightweight, locked uv environment when no virtualenv is active. It uses Python 3.14.6 and contains only these direct dependencies:
-
-- `asyncpg`
-- `httpx`
-- `pydantic`
-- `python-dotenv`
-
-The manifest and lock are tracked in `python/`. Runtime files live outside the repository under `~/.local/share/dotfiles/python`.
-
-The first `python` invocation creates or synchronizes the environment. It can also be prepared explicitly:
-
-```bash
-UV_PROJECT_ENVIRONMENT="$HOME/.local/share/dotfiles/python" \
-  uv sync --locked --project "$HOME/.config/dotfiles/python"
-```
-
-After activating a project virtualenv, `python` and `python3` use that environment directly:
-
-```bash
-createvenv
-venv
-python -c 'import sys; print(sys.executable)'
-```
-
-Use the commands according to their scope:
-
-- `python` / `python3` — shared lightweight environment, or the active virtualenv
-- `uv run python` — Python and dependencies from the current uv project
-- `uvx <tool>` — isolated CLI tools, for example `uvx ansible-lint`
-
-Heavy ML/data frameworks are intentionally not part of the shared environment.
-
 ## Try it
 
 ```bash

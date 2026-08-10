@@ -85,8 +85,6 @@ link_item "$DOTFILES_DIR/config/sheldon" "$HOME/.config/sheldon"
 link_item "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
 link_item "$DOTFILES_DIR/config/zed/settings.json" "$HOME/.config/zed/settings.json"
 
-link_item "$DOTFILES_DIR/python" "$HOME/.config/dotfiles/python"
-
 legacy_lesscolors="$HOME/.config/lesscolors.sh"
 if [[ -L "$legacy_lesscolors" ]] &&
    [[ "$(readlink "$legacy_lesscolors")" == "$DOTFILES_DIR/config/lesscolors.sh" ]]; then
@@ -95,8 +93,6 @@ if [[ -L "$legacy_lesscolors" ]] &&
 fi
 
 link_item "$DOTFILES_DIR/bin/colorless" "$HOME/bin/colorless"
-link_item "$DOTFILES_DIR/bin/python" "$HOME/bin/python"
-link_item "$DOTFILES_DIR/bin/python3" "$HOME/bin/python3"
 
 if (( APPLY_MACOS_DEFAULTS )); then
   apply_macos_defaults
