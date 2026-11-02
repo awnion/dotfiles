@@ -1,27 +1,29 @@
--- Setup language servers.
-local lspconfig = require('lspconfig')
-
-lspconfig.pyright.setup {}
-lspconfig.dockerls.setup {}
-lspconfig.bashls.setup {}
-lspconfig.lua_ls.setup {
+-- Setup language servers. Rust is handled by rustaceanvim.
+vim.lsp.config("emmylua_ls", {
   settings = {
-    Lua = {
+    emmylua = {
+      runtime = {
+        version = "LuaJIT",
+      },
       diagnostics = {
-        globals = { 'vim' }
+        globals = { "vim" },
       },
       workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
-        checkThirdParty = false
+        library = { vim.env.VIMRUNTIME },
       },
-      telemetry = {
-        enable = false
-      }
-    }
-  }
-}
-lspconfig.ts_ls.setup {}
-lspconfig.gopls.setup {}
+    },
+  },
+})
+
+vim.lsp.enable({
+  "bashls",
+  "docker_language_server",
+  "emmylua_ls",
+  "gopls",
+  "ruff",
+  "tsc",
+  "ty",
+})
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

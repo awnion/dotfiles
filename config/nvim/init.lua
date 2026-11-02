@@ -1,5 +1,8 @@
 HOME = os.getenv("HOME")
 
+-- No plugin needs the Python provider.
+vim.g.loaded_python3_provider = 0
+
 vim.opt.swapfile = true
 vim.opt.number = true
 vim.opt.mouse = "a"
@@ -51,9 +54,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end
   end,
 })
-
-local black_on_save = vim.api.nvim_create_augroup("black_on_save", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*.py", command = "silent! Black", group = black_on_save })
 
 -- disable editorconfig in gitcommit
 vim.api.nvim_create_autocmd("FileType", { pattern = "gitcommit", command = "let b:EditorConfig_disable = 1" })

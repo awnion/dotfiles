@@ -23,9 +23,7 @@ require("lazy").setup({
   { 'itchyny/lightline.vim' },
   { 'airblade/vim-gitgutter' },
 
-  -- :MasonUpdate updates registry contents
-  { "williamboman/mason.nvim",          build = ":MasonUpdate" },
-  { "williamboman/mason-lspconfig.nvim" },
+  { "mason-org/mason.nvim" },
 
   -- LSP
   { 'neovim/nvim-lspconfig' },
@@ -37,7 +35,6 @@ require("lazy").setup({
       require('crates').setup()
     end,
   },
-  { 'psf/black' },
 
   -- Autocompletion
   {
