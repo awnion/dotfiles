@@ -17,7 +17,7 @@ vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappin
 -- see https://github.com/folke/lazy.nvim#-plugin-spec
 require("lazy").setup({
   { "nvim-telescope/telescope.nvim",    tag = "0.1.8",         dependencies = { "nvim-lua/plenary.nvim" }, },
-  { 'nvim-treesitter/nvim-treesitter',  build = ":TSUpdate" },
+  { 'nvim-treesitter/nvim-treesitter',  branch = "main",       lazy = false, build = ":TSUpdate" },
   { 'tpope/vim-surround' },
 
   { 'itchyny/lightline.vim' },
@@ -29,7 +29,7 @@ require("lazy").setup({
 
   -- LSP
   { 'neovim/nvim-lspconfig' },
-  { 'simrat39/rust-tools.nvim' },
+  { 'mrcjkb/rustaceanvim',              version = "^9",        lazy = false },
   {
     'saecki/crates.nvim',
     tag = 'stable',
@@ -67,7 +67,6 @@ require("lazy").setup({
 
   -- justfile
   { 'NoahTheDuke/vim-just' },
-  { 'IndianBoy42/tree-sitter-just' },
 
   -- editorconfig
   { 'editorconfig/editorconfig-vim' },

@@ -1,10 +1,6 @@
 -- Setup language servers.
 local lspconfig = require('lspconfig')
 
-local on_attach = function(client)
-  require 'completion'.on_attach(client)
-end
-
 lspconfig.pyright.setup {}
 lspconfig.dockerls.setup {}
 lspconfig.bashls.setup {}
@@ -26,28 +22,6 @@ lspconfig.lua_ls.setup {
 }
 lspconfig.ts_ls.setup {}
 lspconfig.gopls.setup {}
-lspconfig.rust_analyzer.setup {
-  on_attach = on_attach,
-  -- Server-specific settings. See `:help lspconfig-setup`
-  settings = {
-    ["rust-analyzer"] = {
-      imports = {
-        granularity = {
-          group = "module",
-        },
-        prefix = "self",
-      },
-      cargo = {
-        buildScripts = {
-          enable = true,
-        },
-      },
-      procMacro = {
-        enable = true
-      },
-    },
-  },
-}
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

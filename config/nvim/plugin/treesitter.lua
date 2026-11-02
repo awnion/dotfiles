@@ -1,62 +1,78 @@
-require("nvim-treesitter.configs").setup({
-  -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  -- ensure_installed = { "rust", "make", "c", "lua", "vim", "vimdoc", "query" },
-  ensure_installed = {
-    "bash",
-    "go",
-    "html",
-    "javascript",
-    "json",
-    "json5",
-    "lua",
-    "make",
-    "markdown",
-    "markdown_inline",
-    "python",
-    "query",
-    "regex",
-    "rust",
-    "tsx",
-    "typescript",
-    "vim",
-    "vimdoc",
-    "yaml",
-  },
+local ts = require("nvim-treesitter")
 
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+vim.g.treesitter_parsers = {
+  "bash",
+  "go",
+  "html",
+  "javascript",
+  "json",
+  "json5",
+  "lua",
+  "make",
+  "markdown",
+  "markdown_inline",
+  "python",
+  "query",
+  "regex",
+  "rust",
+  "tsx",
+  "typescript",
+  "vim",
+  "vimdoc",
+  "yaml",
+}
 
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
+-- Quitting mid-install leaves temp dirs and CLI locks behind that make later installs fail.
+local function clear_stale_install(lang)
+  local cache = vim.fn.stdpath("cache")
+  local leftovers = vim.fn.glob(cache .. "/tree-sitter-" .. lang .. "-tmp", false, true)
+  local locks = vim.fs.dirname(cache) .. "/tree-sitter/lock/" .. lang .. "-*.lock"
+  vim.list_extend(leftovers, vim.fn.glob(locks, false, true))
+  for _, path in ipairs(leftovers) do
+    vim.fn.delete(path, "rf")
+  end
+end
 
-  -- List of parsers to ignore installing (for "all")
-  ignore_install = { "javascript" },
+local installed = ts.get_installed("parsers")
+local missing = vim.tbl_filter(function(lang)
+  return not vim.list_contains(installed, lang)
+end, vim.g.treesitter_parsers)
+if #missing > 0 then
+  clear_stale_install("*")
+  ts.install(missing, { force = true })
+end
 
-  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+local max_filesize = 100 * 1024 -- 100 KB
+local installing = {}
 
-  highlight = {
-    enable = true,
+local function start(buf, lang)
+  local stats = vim.uv.fs_stat(vim.api.nvim_buf_get_name(buf))
+  if stats and stats.size > max_filesize then
+    return
+  end
+  pcall(vim.treesitter.start, buf, lang)
+end
 
-    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-    -- the name of the parser)
-    -- list of language that will be disabled
-    -- disable = { "c", "rust" },
-    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-    disable = function(lang, buf)
-      local max_filesize = 100 * 1024 -- 100 KB
-      local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-      if ok and stats and stats.size > max_filesize then
-        return true
-      end
-    end,
+-- Highlight every buffer with a parser, installing a missing parser on first use.
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("UserTreesitter", {}),
+  callback = function(args)
+    local lang = vim.treesitter.language.get_lang(args.match)
+    if not lang then
+      return
+    end
 
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
+    if vim.list_contains(ts.get_installed("parsers"), lang) then
+      start(args.buf, lang)
+    elseif not installing[lang] and vim.list_contains(ts.get_available(), lang) then
+      installing[lang] = true
+      clear_stale_install(lang)
+      ts.install(lang, { force = true }):await(function()
+        installing[lang] = nil
+        if vim.api.nvim_buf_is_valid(args.buf) then
+          start(args.buf, lang)
+        end
+      end)
+    end
+  end,
 })
