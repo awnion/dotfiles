@@ -98,16 +98,6 @@ export PATH
 
 export LANGUAGE=en_US.UTF-8
 
-# Optionally routes each session through the local proxy.
-if [[ -e "$HOME/.claude/claude-code-proxy-enabled" ]]; then
-  export ANTHROPIC_BASE_URL=http://127.0.0.1:8317
-  export ANTHROPIC_AUTH_TOKEN=sk-123
-  export ANTHROPIC_MODEL=gpt-5.6-sol
-  export ANTHROPIC_SMALL_FAST_MODEL=gpt-5.6-luna
-  export CLAUDE_CODE_SUBAGENT_MODEL=gpt-5.6-sol
-  export CLAUDE_CODE_AUTO_COMPACT_WINDOW=270000
-fi
-
 # Machine-specific paths and secrets belong here, outside the repository.
 _dotfiles_local_profile="${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles/local.sh"
 [[ -r "$_dotfiles_local_profile" ]] && source "$_dotfiles_local_profile"
