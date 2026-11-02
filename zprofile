@@ -52,6 +52,9 @@ _dotfiles_path_prepend "$HOME/go/bin"
 export BUN_INSTALL="$HOME/.bun"
 _dotfiles_path_prepend "$BUN_INSTALL/bin"
 
+export BEND_NO_TELEMETRY=1
+_dotfiles_path_prepend "$HOME/.bend/bin"
+
 _dotfiles_path_prepend "$HOME/.deno/bin"
 
 export WASMTIME_HOME="$HOME/.wasmtime"
