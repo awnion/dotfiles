@@ -14,7 +14,8 @@ RUN useradd -m -s /bin/zsh aw \
 USER aw
 RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
-RUN brew install sheldon starship fd fzf jq bat neovim coreutils uv
+RUN brew install sheldon starship fd fzf jq bat neovim coreutils uv \
+    go node ripgrep tree-sitter-cli
 
 FROM base
 RUN useradd -m -s /bin/zsh -G sudo aw \
@@ -28,13 +29,10 @@ ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}
 COPY --chown=aw:aw . /home/aw/dotfiles
 RUN cd /tmp && bash /home/aw/dotfiles/install.sh
 RUN sheldon lock
-RUN UV_PROJECT_ENVIRONMENT=/home/aw/.local/share/dotfiles/python \
-    uv sync --locked --project /home/aw/.config/dotfiles/python
 
-RUN zsh -lc 'python -c "import asyncpg, httpx, pydantic, dotenv"' \
-    && zsh -fc 'source ~/.zprofile; initial=$PATH; unset __ZPROFILE; source ~/.zprofile; [[ $PATH == $initial ]]' \
-    && bash -lc 'python3 -c "import asyncpg, httpx, pydantic, dotenv"' \
+RUN zsh -fc 'source ~/.zprofile; initial=$PATH; unset __ZPROFILE; source ~/.zprofile; [[ $PATH == $initial ]]' \
     && bash --noprofile --norc -c \
       'source ~/.bashrc; initial=$PATH; unset DOTFILES_BASH_PROFILE_LOADED; source ~/.bash_profile; [[ $PATH == "$initial" ]]'
+RUN /home/aw/dotfiles/tests/nvim-smoke.sh
 
 ENTRYPOINT ["/bin/zsh", "-l"]

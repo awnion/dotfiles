@@ -11,6 +11,7 @@ portable, and safe to apply repeatedly.
 - `bin/` contains small user-facing utilities.
 - `python/` defines the locked shared uv environment.
 - `docs/` contains standalone setup notes.
+- `tests/` contains checks that the Docker build runs.
 
 ## Change rules
 
@@ -38,8 +39,9 @@ portable, and safe to apply repeatedly.
 Run checks relevant to the edited files:
 
 ```bash
-bash -n install.sh bash_profile bashrc
+bash -n install.sh bash_profile bashrc tests/nvim-smoke.sh
 zsh -n zprofile zshrc
+tests/nvim-smoke.sh
 uv lock --check --project python
 .githooks/pre-commit
 git diff --check

@@ -39,6 +39,25 @@ Machine-specific paths and secrets can be placed in the untracked file:
 
 PATH changes are idempotent, so nested shells do not multiply entries.
 
+## Neovim
+
+The config in `config/nvim` targets the latest stable Neovim and needs `git`, a C
+compiler, `tree-sitter-cli`, `node`, and `go` on `PATH`. The first start installs
+plugins from `lazy-lock.json`, then treesitter parsers and language servers in
+the background:
+
+| Language | Tools |
+| --- | --- |
+| Python | `ty`, `ruff` (format on save) |
+| TypeScript, JavaScript | `tsc` (TypeScript 7) |
+| Lua | `emmylua_ls` |
+| Rust | `rust-analyzer` through `rustaceanvim` |
+| Go | `gopls` |
+| Bash | `bash-language-server`, `shellcheck` |
+| Docker | `docker-language-server` |
+
+Check the config with `tests/nvim-smoke.sh`; the Docker build runs it too.
+
 ## Try it
 
 ```bash
