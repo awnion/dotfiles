@@ -16,7 +16,7 @@ vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappin
 
 -- see https://github.com/folke/lazy.nvim#-plugin-spec
 require("lazy").setup({
-  { "nvim-telescope/telescope.nvim",    tag = "0.1.8",         dependencies = { "nvim-lua/plenary.nvim" }, },
+  { "nvim-telescope/telescope.nvim",    tag = "v0.2.2",        dependencies = { "nvim-lua/plenary.nvim" }, },
   { 'nvim-treesitter/nvim-treesitter',  branch = "main",       lazy = false, build = ":TSUpdate" },
   { 'tpope/vim-surround' },
 
@@ -96,4 +96,7 @@ require("lazy").setup({
       },
     },
   }
+}, {
+  -- No plugin needs luarocks
+  rocks = { enabled = false },
 })
