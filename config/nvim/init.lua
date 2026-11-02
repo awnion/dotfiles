@@ -37,13 +37,20 @@ vim.cmd.colorscheme 'one'
 -- Highlight on yank
 local yankGrp = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
-  command = "silent! lua vim.highlight.on_yank()",
+  command = "silent! lua vim.hl.on_yank()",
   group = yankGrp,
 })
 
 
--- format on save
-vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*", command = "lua vim.lsp.buf.format()" })
+-- format on save, only when an attached server can format
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = vim.api.nvim_create_augroup("FormatOnSave", { clear = true }),
+  callback = function(args)
+    if #vim.lsp.get_clients({ bufnr = args.buf, method = "textDocument/formatting" }) > 0 then
+      vim.lsp.buf.format({ bufnr = args.buf, timeout_ms = 3000 })
+    end
+  end,
+})
 
 local black_on_save = vim.api.nvim_create_augroup("black_on_save", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*.py", command = "silent! Black", group = black_on_save })
