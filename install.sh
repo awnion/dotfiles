@@ -73,6 +73,7 @@ apply_macos_defaults () {
 link_item "$DOTFILES_DIR/bash_profile" "$HOME/.bash_profile"
 link_item "$DOTFILES_DIR/bashrc" "$HOME/.bashrc"
 link_item "$DOTFILES_DIR/gitconfig" "$HOME/.gitconfig"
+link_item "$DOTFILES_DIR/profile" "$HOME/.profile"
 link_item "$DOTFILES_DIR/vimrc" "$HOME/.vimrc"
 link_item "$DOTFILES_DIR/zprofile" "$HOME/.zprofile"
 link_item "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"

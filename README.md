@@ -29,6 +29,7 @@ shell-specific:
 
 - Zsh: `.zprofile` and `.zshrc`
 - Bash: `.bash_profile` and `.bashrc`
+- POSIX sh: `.profile`
 
 Machine-specific paths and secrets can be placed in the untracked file:
 
